@@ -91,7 +91,7 @@
             <!-- BEGIN MESSAGES DROPDOWN -->
             <li class="dropdown" id="messages-header">
                 <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <i class="icon-paper-plane"></i>
+                    <i class="octicon octicon-mail-read"></i>
                 <span class="badge badge-primary badge-header">
                 8
                 </span>

@@ -51,17 +51,17 @@
             <li class="nav-parent">
                 <a href="#"><i class="icon-envelope"></i><span>Mailbox</span> <span class="fa arrow"></span></a>
                 <ul class="children collapse">
-                    <li><a href="#"> Inbox</a></li>
-                    <li><a href="#"> Outbox</a></li>
-                    <li><a href="#"> Archive</a></li>
+                    <li><a href="<?=site_url()?>inbox.html"> Inbox</a></li>
+                    <li><a href="<?=site_url()?>outbox.html"> Outbox</a></li>
+                    <li><a href="<?=site_url()?>archive.html"> Archive</a></li>
                 </ul>
             </li>
             <li class="nav-parent">
                 <a href="#"><i class="icon-bar-chart"></i><span>Report</span> <span class="fa arrow"></span></a>
                 <ul class="children collapse">
-                    <li><a href="#"> Today</a></li>
-                    <li><a href="#"> Last Week</a></li>
-                    <li><a href="#"> All</a></li>
+                    <li><a href="<?=site_url()?>report/today.html"> Today</a></li>
+                    <li><a href="<?=site_url()?>report/week.html"> Last Week</a></li>
+                    <li><a href="<?=site_url()?>report.html"> All</a></li>
                 </ul>
             </li>
         </ul>

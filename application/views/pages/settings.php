@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Update Account</button>
+                                <button type="submit" class="btn btn-primary">Update Setting</button>
                             </div>
                         </div>
                     </div>

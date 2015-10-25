@@ -52,6 +52,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'page';
 
 $route['inbox'] = 'inbox/index';
+$route['inbox/create'] = 'inbox/create';
+$route['inbox/edit/(:id)'] = 'inbox/edit/$1';
+$route['inbox/detail/(:id)'] = 'inbox/show/$1';
+$route['inbox/update'] = 'inbox/update';
+$route['inbox/delete'] = 'inbox/delete';
 
 $route['login'] = 'page/login';
 $route['register'] = 'page/register';

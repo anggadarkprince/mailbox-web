@@ -22,4 +22,30 @@ class Inbox extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
+    public function create()
+    {
+        $data = [
+            'title' => "Create In-mail",
+            'page' => "inbox/create",
+        ];
+        $this->load->view('templates/template', $data);
+    }
+
+    public function edit($id = null)
+    {
+        $data = [
+            'title' => "Edit In-mail",
+            'page' => "inbox/edit",
+        ];
+        $this->load->view('templates/template', $data);
+    }
+
+    public function show($id = null)
+    {
+        $data = [
+            'title' => "Detail In-mail",
+            'page' => "inbox/show",
+        ];
+        $this->load->view('templates/template', $data);
+    }
 }

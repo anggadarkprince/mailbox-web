@@ -95,16 +95,6 @@
 
                 <h3>Harold Fox</h3>
             </a>
-            <a class="dummy-media-object" href="#">
-                <img src="<?= base_url() ?>assets/global/images/avatars/avatar5_big.png" alt="Avatar 5"/>
-
-                <h3>Martin Hendrix</h3>
-            </a>
-            <a class="dummy-media-object" href="#">
-                <img src="<?= base_url() ?>assets/global/images/avatars/avatar6_big.png" alt="Avatar 6"/>
-
-                <h3>Paul Ferguson</h3>
-            </a>
         </div>
         <div class="dummy-column">
             <h2>Articles</h2>
@@ -128,16 +118,6 @@
 
                 <h3>Just another funny story</h3>
             </a>
-            <a class="dummy-media-object" href="#">
-                <img src="<?= base_url() ?>assets/global/images/gallery/5.jpg" alt="5"/>
-
-                <h3>How many water we drink every day?</h3>
-            </a>
-            <a class="dummy-media-object" href="#">
-                <img src="<?= base_url() ?>assets/global/images/gallery/6.jpg" alt="6"/>
-
-                <h3>Drag and drop tutorials</h3>
-            </a>
         </div>
         <div class="dummy-column">
             <h2>Recent</h2>
@@ -160,16 +140,6 @@
                 <img src="<?= base_url() ?>assets/global/images/gallery/10.jpg" alt="10"/>
 
                 <h3>New application arrive</h3>
-            </a>
-            <a class="dummy-media-object" href="#">
-                <img src="<?= base_url() ?>assets/global/images/gallery/11.jpg" alt="11"/>
-
-                <h3>Notification prettify</h3>
-            </a>
-            <a class="dummy-media-object" href="#">
-                <img src="<?= base_url() ?>assets/global/images/gallery/12.jpg" alt="12"/>
-
-                <h3>My article is the last recent</h3>
             </a>
         </div>
     </div>

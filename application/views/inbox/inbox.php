@@ -1,11 +1,9 @@
 <div class="header">
-    <h2>Inbox <strong>Data</strong> <a href="#" class="btn btn-primary btn-embossed">New Mail</a></h2>
+    <h2>Inbox <strong>Data</strong> <a href="<?=site_url()?>inbox/create.html" class="btn btn-primary btn-embossed m-t-10">New In-Mail</a></h2>
     <div class="breadcrumb-wrapper">
         <ol class="breadcrumb">
-            <li><a href="dashboard.html">Dashboard</a>
-            </li>
-            <li><a href="tables.html">Mailbox</a>
-            </li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="tables.html">Mailbox</a></li>
             <li class="active">Inbox</li>
         </ol>
     </div>
@@ -13,24 +11,30 @@
 <div class="row">
     <div class="col-md-12 portlets">
         <div class="panel">
+            <div class="panel-header panel-controls">
+                <h3><i class="fa fa-envelope"></i> Inbox <strong>List</strong></h3>
+            </div>
             <div class="panel-content">
-                <table class="table table-hover table-dynamic filter-head">
+                <table class="table table-hover table-dynamic">
                     <thead>
                     <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>Mail Number</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Detail</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
+                        <td>ADK083564HK</td>
+                        <td>Design Web Site</td>
+                        <td>25 January 2015</td>
+                        <td><a href="<?=site_url()?>inbox/show">Detail</a></td>
+                        <td>
+                            <a href="<?=site_url()?>inbox/edit" class="btn btn-primary btn-sm m-r-0">EDIT</a>
+                            <a href="<?=site_url()?>inbox/delete" class="btn btn-danger btn-sm m-l-0">DELETE</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Trident</td>

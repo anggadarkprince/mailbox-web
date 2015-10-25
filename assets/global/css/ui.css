@@ -2679,7 +2679,7 @@ ul.list-unstyled {
   z-index: 2;
 }
 .modal-image .modal-footer p {
-  font-family: 'Lato', arial;
+  font-family: 'Open Sans', arial;
   font-weight: 100;
   font-size: 16px;
 }
@@ -4470,7 +4470,7 @@ label.ios-switch:last-of-type {
 }
 .ui-datepicker .ui-datepicker-title {
   color: #E9E9E9;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   font-weight: 100;
   margin: 0 2.3em;
   text-align: center;
@@ -4897,12 +4897,12 @@ ul.pagination > .disabled > a:focus {
 }
 .pagination2 .fa-angle-left:before {
   content: "Prev";
-  font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, sans-serif;
+  font-family: 'Open Sans', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, sans-serif;
   line-height: 20px;
 }
 .pagination2 .fa-angle-right:before {
   content: "Next";
-  font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, sans-serif;
+  font-family: 'Open Sans', 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, sans-serif;
   line-height: 20px;
 }
 .pagination2 .pagination > li > a {
