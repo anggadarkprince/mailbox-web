@@ -22,4 +22,14 @@ class Report extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
+    public function today()
+    {
+
+    }
+
+    public function week()
+    {
+
+    }
+
 }

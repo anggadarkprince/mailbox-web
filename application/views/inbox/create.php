@@ -55,9 +55,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="no_mail">Tanggal Surat</label>
+                                <label class="col-sm-4 control-label" for="mail_date">Tanggal Surat</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" name="mail_date" class="date-picker form-control form-white" placeholder="Select a mail date...">
+                                    <input type="text" name="mail_date" id="mail_date" class="date-picker form-control form-white" placeholder="Select a mail date...">
                                     <i class="icon-calendar"></i>
                                 </div>
                             </div>
@@ -95,8 +95,7 @@
                                 </div>
                             </div>
                             <div class="form-group text-right">
-                                <label class="col-sm-4 control-label"></label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary pull-right m-t-20">Create In-Mail</button>
                                     <a href="<?=site_url()?>inbox.html" class="btn btn-default pull-right m-t-20">Back</a>
                                 </div>

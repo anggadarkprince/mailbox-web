@@ -58,6 +58,15 @@ $route['inbox/detail/(:id)'] = 'inbox/show/$1';
 $route['inbox/update'] = 'inbox/update';
 $route['inbox/delete'] = 'inbox/delete';
 
+$route['outbox'] = 'outbox/index';
+$route['outbox/create'] = 'outbox/create';
+$route['outbox/edit/(:id)'] = 'outbox/edit/$1';
+$route['outbox/detail/(:id)'] = 'outbox/show/$1';
+$route['outbox/update'] = 'outbox/update';
+$route['outbox/delete'] = 'outbox/delete';
+
+$route['archive'] = 'page/login';
+
 $route['login'] = 'page/login';
 $route['register'] = 'page/register';
 $route['logout'] = 'page/logout';

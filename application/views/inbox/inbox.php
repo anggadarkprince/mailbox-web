@@ -2,8 +2,8 @@
     <h2>Inbox <strong>Data</strong> <a href="<?=site_url()?>inbox/create.html" class="btn btn-primary btn-embossed m-t-10">New In-Mail</a></h2>
     <div class="breadcrumb-wrapper">
         <ol class="breadcrumb">
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="tables.html">Mailbox</a></li>
+            <li><a href="<?=site_url()?>dashboard.html">Dashboard</a></li>
+            <li><a href="<?=site_url()?>archive.html">Mailbox</a></li>
             <li class="active">Inbox</li>
         </ol>
     </div>
