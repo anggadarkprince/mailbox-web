@@ -53,6 +53,7 @@ class Inbox extends CI_Controller
         $data = [
             'title' => "Detail In-mail",
             'page' => "inbox/show",
+            'mail' => $this->inbox_model->read($id)
         ];
         $this->load->view('templates/template', $data);
     }

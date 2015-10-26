@@ -23,7 +23,8 @@
                         <th>Subject</th>
                         <th>Date</th>
                         <th>Detail</th>
-                        <th>Action</th>
+                        <th>Label</th>
+                        <th width="150">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,21 @@
                             <td><?=$mail['subject']?><?=$mail['subject']?></td>
                             <td><?=date_format(date_create($mail['mail_date']), "d F Y")?></td>
                             <td><a href="<?=site_url()?>inbox/show/<?=$mail['id']?>.html">Detail</a></td>
+                            <td>
+                                <?php
+                                $label = "success";
+                                if($mail["label"] == "IMPORTANT"){
+                                    $label = "danger";
+                                }
+                                else if($mail["label"] == "SOON"){
+                                    $label = "warning";
+                                }
+                                else if($mail["label"] == "GENERAL"){
+                                    $label = "primary";
+                                }
+                                ?>
+                                <span class="label label-<?=$label?>"><?=$mail['label']?></span>
+                            </td>
                             <td>
                                 <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0">EDIT</a>
                                 <a href="<?=site_url()?>inbox/delete/<?=$mail['id']?>.html" class="btn btn-danger btn-sm m-l-0">DELETE</a>

@@ -31,7 +31,8 @@ class Inbox_model extends CI_Model
                 ->select("*")
                 ->from($this->table)
                 ->join("labels", "label_id = labels.id")
-                ->where($this->pk, $id);
+                ->where($this->table.".".$this->pk, $id)
+                ->get();
             return $result->row_array();
         }
     }
