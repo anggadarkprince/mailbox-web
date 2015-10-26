@@ -34,24 +34,37 @@
         </ul>
     </div>
     <div class="account-form">
-        <form class="form-signup" action="<?= site_url() ?>auth/register" role="form" method="post">
+
+        <!-- alert -->
+        <?php if(isset($operation)){ ?>
+            <div class="alert alert-<?=$operation?>" role="alert">
+                <p class="text-center"><?php echo $message; ?></p>
+            </div>
+        <?php } ?>
+        <!-- end of alert -->
+
+        <form class="form-signup" action="<?= site_url() ?>user/register" role="form" method="post">
             <h3><strong>Create</strong> your account</h3>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="append-icon">
-                        <input type="text" name="firstname" id="firstname" class="form-control form-white firstname" placeholder="First Name" required autofocus>
+                        <input type="text" name="firstname" id="firstname" class="form-control form-white firstname" placeholder="First Name" required autofocus value="<?=set_value('firstname', '');?>">
                         <i class="icon-user"></i>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="append-icon">
-                        <input type="text" name="lastname" id="lastname" class="form-control form-white lastname" placeholder="Last Name" required>
+                        <input type="text" name="lastname" id="lastname" class="form-control form-white lastname" placeholder="Last Name" required value="<?=set_value('lastname', '');?>">
                         <i class="icon-user"></i>
                     </div>
                 </div>
             </div>
             <div class="append-icon">
-                <input type="email" name="email" id="email" class="form-control form-white email" placeholder="Email" required>
+                <input type="text" name="username" id="username" class="form-control form-white username" placeholder="Username" required value="<?=set_value('username', '');?>">
+                <i class="icon-key"></i>
+            </div>
+            <div class="append-icon">
+                <input type="email" name="email" id="email" class="form-control form-white email" placeholder="Email" required value="<?=set_value('email', '');?>">
                 <i class="icon-envelope"></i>
             </div>
             <div class="append-icon m-b-10">
@@ -69,7 +82,7 @@
                 </label>
             </div>
             <div class="m-t-20">
-                <button type="submit" id="submit-form" class="btn btn-lg btn-dark btn-rounded" data-style="expand-left">Sign In</button>
+                <button type="submit" class="btn btn-lg btn-dark btn-rounded">Sign Up</button>
             </div>
         </form>
         <div class="form-footer">

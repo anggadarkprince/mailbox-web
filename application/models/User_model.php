@@ -9,10 +9,9 @@
 class User_model extends CI_Model
 {
     private $table = "users";
-    private $pk = "id";
 
     public static $TYPE_DEV = "DEV";
-    public static $TYPE_ADM = "ADM";
+    public static $TYPE_ADM = "ADMIN";
 
     public static $SESSION_ID = "mail-id";
     public static $SESSION_USERNAME = "mail-username";
@@ -60,5 +59,20 @@ class User_model extends CI_Model
         $this->session->unset_userdata(User_model::$SESSION_ID);
         $this->session->unset_userdata(User_model::$SESSION_AVATAR);
         $this->session->unset_userdata(User_model::$SESSION_NAME);
+    }
+
+    public function check_existing_username($username)
+    {
+        $user = $this->db->get_where($this->table, array("username" => $username));
+        if($user->num_rows() > 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public function register($data)
+    {
+        return $this->db->insert($this->table, $data);
     }
 }

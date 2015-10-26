@@ -16,7 +16,7 @@ class Page extends CI_Controller
 
     public function index()
     {
-        $this->view('login');
+        redirect("login");
     }
 
     public function view($page = 'login')
@@ -40,14 +40,28 @@ class Page extends CI_Controller
 
     public function login()
     {
-        $data = ['title' => "Login"];
-        $this->load->view('pages/login', $data);
+        $this->load->model("User_model","user_model");
+        if(User_model::is_authorize(User_model::$TYPE_ADM) || User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("dashboard");
+        }
+        else{
+            $data = ['title' => "Login"];
+            $this->load->view('pages/login', $data);
+        }
     }
 
     public function register()
     {
-        $data = ['title' => "Register"];
-        $this->load->view('pages/register', $data);
+        $this->load->model("User_model","user_model");
+        if(User_model::is_authorize(User_model::$TYPE_ADM) || User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("dashboard");
+        }
+        else{
+            $data = ['title' => "Register"];
+            $this->load->view('pages/register', $data);
+        }
     }
 
     public function logout()

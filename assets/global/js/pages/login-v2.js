@@ -32,14 +32,7 @@ $(function() {
                 $('.form-signin').slideDown(300);
             });
         });
-        $('#submit-form, #submit-password').click(function(e) {
-            e.preventDefault();
-            var l = Ladda.create(this);
-            l.start();
-            setTimeout(function() {
-                window.location.href = "dashboard.html";
-            }, 2000);
-        });
+
         $.backstretch(["../assets/global/images/gallery/login.jpg"],
         {
             fade: 600,
@@ -145,12 +138,18 @@ $(function() {
                     },
                     lastname:
                     {
-                        required: true,
+                        required: false,
                         minlength: 4,
+                    },
+                    username:
+                    {
+                        required: true,
+                        maxlength: 50,
                     },
                     email: {
                         required: true,
-                        email: true
+                        email: true,
+                        maxlength: 100
                     },
                     password: {
                         required: true,
@@ -189,7 +188,7 @@ $(function() {
                         required: 'Write your password',
                         minlength: 'Minimum 6 characters',
                         maxlength: 'Maximum 16 characters',
-                        equalTo: 'Password don\'t match'
+                        equalTo: 'Password doesn\'t match'
                     },
                     terms: {
                         required: 'You must agree with terms'

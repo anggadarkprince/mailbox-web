@@ -38,6 +38,14 @@
             <?php } ?>
             <!-- end of alert -->
 
+            <!-- alert -->
+            <?php if($this->session->flashdata('operation') != NULL){ ?>
+                <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
+                    <p class="text-center"><?=$this->session->flashdata('message'); ?></p>
+                </div>
+            <?php } ?>
+            <!-- end of alert -->
+
             <h3><strong>Sign in</strong> to your account</h3>
             <div class="append-icon">
                 <input type="text" name="username" id="username" class="form-control form-white username" placeholder="Username" required value="<?=set_value('username', '');?>">
@@ -66,7 +74,7 @@
                 <input type="password" name="password" class="form-control form-white password" placeholder="Password" required>
                 <i class="icon-lock"></i>
             </div>
-            <button type="submit" id="submit-password" class="btn btn-lg btn-danger btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
+            <button data-toggle="modal" data-target="#modal-unavailable" class="btn btn-lg btn-danger btn-block">Send Password Reset Link</button>
             <div class="clearfix m-t-60">
                 <p class="pull-left m-t-20 m-b-0"><a id="login" href="#">Have an account? Sign In</a></p>
                 <p class="pull-right m-t-20 m-b-0"><a href="<?= site_url() ?>register">New here? Sign up</a></p>
