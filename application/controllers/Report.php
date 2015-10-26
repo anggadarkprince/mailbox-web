@@ -17,19 +17,27 @@ class Report extends CI_Controller
     {
         $data = [
             'title' => "Report",
-            'page' => "inbox/inbox",
+            'page' => "reports/all",
         ];
         $this->load->view('templates/template', $data);
     }
 
     public function today()
     {
-
+        $data = [
+            'title' => "Today",
+            'page' => "reports/daily",
+        ];
+        $this->load->view('templates/template', $data);
     }
 
     public function week()
     {
-
+        $data = [
+            'title' => "Weekly",
+            'page' => "reports/weekly",
+        ];
+        $this->load->view('templates/template', $data);
     }
 
 }

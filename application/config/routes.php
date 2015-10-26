@@ -67,6 +67,10 @@ $route['outbox/delete'] = 'outbox/delete';
 
 $route['archive'] = 'page/archive';
 
+$route['report'] = 'report/index';
+$route['report/today'] = 'report/today';
+$route['report/week'] = 'report/week';
+
 $route['login'] = 'page/login';
 $route['register'] = 'page/register';
 $route['logout'] = 'page/logout';
