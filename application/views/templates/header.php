@@ -167,7 +167,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-footer clearfix">
-                        <a href="mailbox.html" class="pull-left">See all messages</a>
+                        <a href="<?= site_url() ?>archive.html" class="pull-left">See all messages</a>
                         <a href="#" class="pull-right">
                             <i class="icon-settings"></i>
                         </a>
@@ -178,21 +178,22 @@
             <!-- BEGIN USER DROPDOWN -->
             <li class="dropdown" id="user-header">
                 <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img src="<?=base_url()?>assets/global/images/avatars/user1.png" alt="user image">
-                    <span class="username">Hi, John Doe</span>
+                    <img src="<?= base_url() ?>assets/global/images/avatars/user1.png" alt="user image">
+                    <span class="username">Hi, Angga Ari</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="icon-user"></i><span>My Profile</span></a>
+                        <a href="<?= site_url() ?>account.html"><i class="icon-user"></i><span>My Profile</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-calendar"></i><span>My Calendar</span></a>
+                        <a href="<?= site_url() ?>calendar.html"><i
+                                class="icon-calendar"></i><span>My Calendar</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-settings"></i><span>Settings</span></a>
+                        <a href="<?= site_url() ?>settings.html"><i class="icon-settings"></i><span>Settings</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-logout"></i><span>Logout</span></a>
+                        <a href="<?= site_url() ?>logout.html"><i class="icon-logout"></i><span>Logout</span></a>
                     </li>
                 </ul>
             </li>

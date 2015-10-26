@@ -46,7 +46,7 @@
             </div>
         </div>
         <ul class="nav nav-sidebar">
-            <li class=" nav-active active"><a href="dashboard.html"><i class="icon-home"></i><span>Dashboard</span></a>
+            <li class=" nav-active active"><a href="<?=site_url()?>dashboard.html"><i class="icon-home"></i><span>Dashboard</span></a>
             </li>
             <li class="nav-parent">
                 <a href="#"><i class="icon-envelope"></i><span>Mailbox</span> <span class="fa arrow"></span></a>
