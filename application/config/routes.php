@@ -65,7 +65,7 @@ $route['outbox/detail/(:id)'] = 'outbox/show/$1';
 $route['outbox/update'] = 'outbox/update';
 $route['outbox/delete'] = 'outbox/delete';
 
-$route['archive'] = 'page/login';
+$route['archive'] = 'page/archive';
 
 $route['login'] = 'page/login';
 $route['register'] = 'page/register';

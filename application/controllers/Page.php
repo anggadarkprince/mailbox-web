@@ -54,4 +54,13 @@ class Page extends CI_Controller
     {
 
     }
+
+    public function archive()
+    {
+        $data = [
+            'title' => "Archive",
+            'page' => "mails/archive",
+        ];
+        $this->load->view('templates/template', $data);
+    }
 }
