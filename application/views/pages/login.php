@@ -29,17 +29,26 @@
         </ul>
     </div>
     <div class="account-form">
-        <form class="form-signin" role="form">
+        <form action="<?=site_url()?>user/auth" method="post" class="form-signin" role="form">
+            <!-- alert -->
+            <?php if(isset($operation)){ ?>
+                <div class="alert alert-<?=$operation?>" role="alert">
+                    <p class="text-center"><?php echo $message; ?></p>
+                </div>
+            <?php } ?>
+            <!-- end of alert -->
+
             <h3><strong>Sign in</strong> to your account</h3>
             <div class="append-icon">
-                <input type="text" name="name" id="name" class="form-control form-white username" placeholder="Username" required>
+                <input type="text" name="username" id="username" class="form-control form-white username" placeholder="Username" required value="<?=set_value('username', '');?>">
                 <i class="icon-user"></i>
             </div>
             <div class="append-icon m-b-20">
-                <input type="password" name="password" class="form-control form-white password" placeholder="Password" required>
+                <input type="password" name="password" class="form-control form-white password" placeholder="Password" required value="<?=set_value('password', '');?>">
                 <i class="icon-lock"></i>
             </div>
-            <button type="submit" id="submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button" data-style="expand-left">Sign In</button>
+
+            <button type="submit" class="btn btn-lg btn-dark btn-rounded">Sign In</button>
             <span class="forgot-password"><a id="password" href="#">Forgot password?</a></span>
             <div class="form-footer">
                 <div class="social-btn">

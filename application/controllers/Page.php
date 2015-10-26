@@ -52,7 +52,9 @@ class Page extends CI_Controller
 
     public function logout()
     {
-
+        $this->load->model("User_model","user_model");
+        $this->user_model->destroy();
+        redirect(base_url());
     }
 
     public function archive()
