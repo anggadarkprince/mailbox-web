@@ -9,8 +9,8 @@
     </div>
 </div>
 <ul class="nav nav-tabs nav-primary">
-    <li class="active"><a href="#tab2_1" data-toggle="tab"><i class="icon-arrow-down"></i> Inbox</a></li>
-    <li class=""><a href="#tab2_2" data-toggle="tab"><i class="icon-arrow-up"></i> Outbox</a></li>
+    <li class="active"><a href="#tab2_1" data-toggle="tab"><i class="icon-arrow-up"></i> Outbox</a></li>
+    <li class=""><a href="#tab2_2" data-toggle="tab"><i class="icon-arrow-down"></i> inbox</a></li>
 </ul>
 <div class="tab-content">
     <div class="tab-pane fade active in" id="tab2_1">
