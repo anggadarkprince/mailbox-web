@@ -11,6 +11,13 @@ class Inbox extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->model("Inbox_model", "inbox_model");
+        $this->load->model("User_model", "user_model");
+        if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("login");
+        }
     }
 
     public function index()
@@ -18,6 +25,7 @@ class Inbox extends CI_Controller
         $data = [
             'title' => "Inbox",
             'page' => "inbox/inbox",
+            'inbox' => $this->inbox_model->read()
         ];
         $this->load->view('templates/template', $data);
     }

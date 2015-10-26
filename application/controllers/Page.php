@@ -25,6 +25,12 @@ class Page extends CI_Controller
             show_404();
         }
 
+        $this->load->model("User_model","user_model");
+        if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("login");
+        }
+
         $data = [
             'title' => ucfirst($page),
             'page' => "pages/".$page,
