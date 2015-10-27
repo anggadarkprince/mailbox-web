@@ -83,7 +83,7 @@
                 <h4 class="modal-title"><strong>Delete</strong> Mail</h4>
             </div>
             <div class="modal-body">
-                <p class="lead">Are you sure want to delete In-mail:</p>
+                <p class="lead">Are you sure want to delete In-mail?</p>
                 <p class="text-muted">All related data will be deleted</p>
             </div>
             <div class="modal-footer">
