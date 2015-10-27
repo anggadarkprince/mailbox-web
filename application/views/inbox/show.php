@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="attachment">File Surat</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><a href="<?=base_url()?>global/file/<?=$mail['attachment']?>">DOWNLOAD</a></p>
+                                    <p class="form-control-static"><a href="<?=base_url()?>assets/global/file/<?=$mail['attachment']?>">DOWNLOAD</a></p>
                                 </div>
                             </div>
                             <div class="form-group">

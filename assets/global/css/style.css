@@ -13145,3 +13145,13 @@ body.rtl .layout-options .img-sidebar-right {
 .rtl .sidebar-condensed.sidebar-hover:not(.sidebar-collapsed) .main-content {
   margin-right: 0;
 }
+
+.fileinput-filename{
+  display: inline;
+}
+.btn-default.fileinput-exists{
+  display: none;
+}
+.fileinput.input-group > .btn-file {
+  border-radius: 0 4px 4px 0 !important;
+}

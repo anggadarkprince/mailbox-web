@@ -21,6 +21,10 @@
     <link href="<?= base_url() ?>assets/global/css/theme.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/global/css/ui.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/admin/layout1/css/layout.css" rel="stylesheet">
+
+    <link href="<?= base_url() ?>assets/global/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/global/plugins/input-text/style.min.css" rel="stylesheet">
+
     <script src="<?= base_url() ?>assets/global/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <!-- LAYOUT: Apply "submenu-hover" class to body element to have sidebar submenu show on mouse hover -->
@@ -163,6 +167,7 @@
 <script src="<?= base_url() ?>assets/global/plugins/jquery-ui/jquery-ui-1.11.2.min.js"></script>
 <script src="<?= base_url() ?>assets/global/plugins/gsap/main-gsap.min.js"></script>
 <script src="<?= base_url() ?>assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?= base_url() ?>assets/global/plugins/bootstrap/js/jasny-bootstrap.min.js"></script>
 <script src="<?= base_url() ?>assets/global/plugins/jquery-cookies/jquery.cookies.min.js"></script>
 <!-- Jquery Cookies, for theme -->
 <script src="<?= base_url() ?>assets/global/plugins/jquery-block-ui/jquery.blockUI.min.js"></script>

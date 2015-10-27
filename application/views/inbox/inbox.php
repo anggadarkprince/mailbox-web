@@ -15,6 +15,15 @@
                 <h3><i class="fa fa-envelope"></i> Inbox <strong>List</strong></h3>
             </div>
             <div class="panel-content">
+
+                <!-- alert -->
+                <?php if($this->session->flashdata('operation') != NULL){ ?>
+                    <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
+                        <p><?=$this->session->flashdata('message'); ?></p>
+                    </div>
+                <?php } ?>
+                <!-- end of alert -->
+
                 <table class="table table-hover table-dynamic">
                     <thead>
                     <tr>
@@ -34,7 +43,7 @@
                         <tr>
                             <td><?=$no++?></td>
                             <td><?=$mail['mail_number']?></td>
-                            <td><?=$mail['subject']?><?=$mail['subject']?></td>
+                            <td><?=word_limiter($mail['subject'], 5)?></td>
                             <td><?=date_format(date_create($mail['mail_date']), "d F Y")?></td>
                             <td><a href="<?=site_url()?>inbox/show/<?=$mail['id']?>.html">Detail</a></td>
                             <td>
