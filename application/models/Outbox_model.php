@@ -18,8 +18,42 @@ class Outbox_model extends CI_Model
 
     public function next_id()
     {
-        $result = $this->db->query("SELECT IFNULL(MAX(id), 0)+1 AS id FROM inbox")->row_array();
+        $result = $this->db->query("SELECT IFNULL(MAX(id), 0)+1 AS id FROM outbox")->row_array();
         return $result["id"];
+    }
+
+    public function create($mail)
+    {
+        $status = array();
+
+        if ($mail["attachment"] == null) {
+            unset($mail["attachment"]);
+        } else {
+            $config = array(
+                'allowed_types' => '*',
+                'upload_path' => "./assets/global/file",
+                'max_size' => 10000,
+                'file_name' => date("Y-m-y")."_".$mail["attachment"],
+                'overwrite' => false
+            );
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('attachment'))
+            {
+                $status["upload"] = false;
+                $status["query"] = false;
+                $status["message"] = $this->upload->display_errors();
+                return $status;
+            }
+            else
+            {
+                $mail["attachment"] = $this->upload->data()["file_name"];
+                $status["upload"] = true;
+                $status["message"] = "Attachment successfully uploaded";
+            }
+        }
+
+        $status["query"] = $this->db->insert($this->table, $mail);
+        return $status;
     }
 
     public function read($id = null)

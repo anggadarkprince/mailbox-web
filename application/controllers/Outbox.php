@@ -14,6 +14,7 @@ class Outbox extends CI_Controller
 
         $this->load->model("Outbox_model", "outbox_model");
         $this->load->model("User_model", "user_model");
+        $this->load->model("Label_model", "label_model");
         if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
         {
             redirect("login");
@@ -32,10 +33,62 @@ class Outbox extends CI_Controller
 
     public function create()
     {
-        $data = [
-            'title' => "Create Out-mail",
-            'page' => "outbox/create",
-        ];
+        if($this->input->server('REQUEST_METHOD') == "POST")
+        {
+            $this->form_validation->set_rules('no_mail', 'No Surat', 'trim|required');
+            $this->form_validation->set_rules('subject', 'Perihal', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
+            $this->form_validation->set_rules('from', 'Dari', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('from', 'Kepada', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('description', 'Description', 'min_length[0]');
+            $this->form_validation->set_rules('label', 'Label', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $data = [
+                    "operation" => "warning",
+                    "message" => validation_errors()
+                ];
+            }
+            else
+            {
+                $data = [
+                    'subject' => $this->input->post('subject'),
+                    'mail_number' => $this->input->post('no_mail'),
+                    'mail_date' => date_format(date_create($this->input->post('mail_date')), "Y-m-d"),
+                    'from' => $this->input->post('from'),
+                    'to' => $this->input->post('to'),
+                    'description' => $this->input->post('description'),
+                    'attachment' => $_FILES["attachment"]["name"],
+                    'label_id' => $this->input->post('label'),
+                    'user_id' => $this->session->userdata(User_model::$SESSION_ID),
+                ];
+
+                $result = $this->outbox_model->create($data);
+                if(isset($result["upload"]) && !$result["upload"]){
+                    $data = [
+                        "operation" => "warning",
+                        "message" => $result["message"]
+                    ];
+                }
+                else if($result["query"]){
+                    $this->session->set_flashdata("operation", "success");
+                    $this->session->set_flashdata("message", "<strong>In-mail</strong> successfully created");
+                    redirect("outbox");
+                    return;
+                }
+                else{
+                    $data = [
+                        "operation" => "warning",
+                        "message" => "Something is getting wrong",
+                    ];
+                }
+            }
+        }
+        $data['title'] = "Create Out-mail";
+        $data['page'] = "outbox/create";
+        $data['next'] = $this->outbox_model->next_id();
+        $data['labels'] = $this->label_model->read();
         $this->load->view('templates/template', $data);
     }
 
