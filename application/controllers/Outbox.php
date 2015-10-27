@@ -176,7 +176,7 @@ class Outbox extends CI_Controller
 
     public function delete($id)
     {
-        $result = $this->inbox_model->delete($id);
+        $result = $this->outbox_model->delete($id);
         if($result){
             $this->session->set_flashdata("operation", "warning");
             $this->session->set_flashdata("message", "Out-mail successfully deleted");
@@ -185,6 +185,6 @@ class Outbox extends CI_Controller
             $this->session->set_flashdata("operation", "danger");
             $this->session->set_flashdata("message", "Something is getting wrong");
         }
-        redirect("inbox");
+        redirect("outbox");
     }
 }

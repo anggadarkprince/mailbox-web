@@ -55,3 +55,22 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Delete</strong> Mail</h4>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Are you sure want to delete Out-mail?</p>
+                <p class="text-muted">All related data will be deleted</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed m-r-0" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger btn-embossed m-l-0 btn-delete-inbox" data-dismiss="modal">Delete Mail</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -112,4 +112,10 @@ class Outbox_model extends CI_Model
         return $status;
     }
 
+    public function delete($id)
+    {
+        $condition = array($this->pk => $id);
+        return $this->db->delete($this->table, $condition);
+    }
+
 }
