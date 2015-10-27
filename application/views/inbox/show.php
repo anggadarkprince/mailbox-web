@@ -92,9 +92,9 @@
             </div>
             <div class="panel-footer">
                 <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed"><i class="fa fa-chevron-left"></i> Back</a>
-                <a href="<?=site_url()?>inbox/delete/<?=$mail['subject']?>.html" class="btn btn-danger btn-embossed pull-right"><i class="fa fa-trash"></i> Delete</a>
-                <a href="<?=site_url()?>inbox/edit/<?=$mail['subject']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-pencil"></i> Edit</a>
-                <a href="<?=site_url()?>inbox/print/<?=$mail['subject']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-print"></i> Print</a>
+                <a href="<?=site_url()?>inbox/delete/<?=$mail['id']?>.html" class="btn btn-danger btn-embossed pull-right"><i class="fa fa-trash"></i> Delete</a>
+                <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="<?=site_url()?>inbox/print/<?=$mail['id']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-print"></i> Print</a>
             </div>
         </div>
     </div>

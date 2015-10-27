@@ -27,7 +27,7 @@ class Inbox_model extends CI_Model
         $status = array();
 
         if ($mail["attachment"] == null) {
-            unset($mail["favicon"]);
+            unset($mail["attachment"]);
         } else {
             $config = array(
                 'allowed_types' => '*',
@@ -68,7 +68,7 @@ class Inbox_model extends CI_Model
             return $result->result_array();
         } else {
             $result = $this->db
-                ->select("*")
+                ->select("inbox.*, labels.label, labels.description")
                 ->from($this->table)
                 ->join("labels", "label_id = labels.id")
                 ->where($this->table.".".$this->pk, $id)
@@ -77,10 +77,39 @@ class Inbox_model extends CI_Model
         }
     }
 
-    public function update($data, $id)
+    public function update($mail, $id)
     {
+        $status = array();
+
+        if ($mail["attachment"] == null) {
+            unset($mail["attachment"]);
+        } else {
+            $config = array(
+                'allowed_types' => '*',
+                'upload_path' => "./assets/global/file",
+                'max_size' => 10000,
+                'file_name' => date("Y-m-y")."_".$mail["attachment"],
+                'overwrite' => false
+            );
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('attachment'))
+            {
+                $status["upload"] = false;
+                $status["query"] = false;
+                $status["message"] = $this->upload->display_errors();
+                return $status;
+            }
+            else
+            {
+                $mail["attachment"] = $this->upload->data()["file_name"];
+                $status["upload"] = true;
+                $status["message"] = "Attachment successfully uploaded";
+            }
+        }
+
         $this->db->where($this->pk, $id);
-        return $this->db->update($this->table, $data);
+        $status["query"] = $this->db->update($this->table, $mail);
+        return $status;
     }
 
     public function delete($id)
