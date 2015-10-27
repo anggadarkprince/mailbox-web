@@ -174,7 +174,7 @@ class Outbox extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
-    public function delete($id)
+    public function delete($id, $redirect = null)
     {
         $result = $this->outbox_model->delete($id);
         if($result){
@@ -185,6 +185,11 @@ class Outbox extends CI_Controller
             $this->session->set_flashdata("operation", "danger");
             $this->session->set_flashdata("message", "Something is getting wrong");
         }
-        redirect("outbox");
+        if($redirect != null){
+            redirect($redirect);
+        }
+        else{
+            redirect("outbox");
+        }
     }
 }

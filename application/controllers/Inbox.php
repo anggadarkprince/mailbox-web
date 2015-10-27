@@ -177,7 +177,7 @@ class Inbox extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
-    public function delete($id)
+    public function delete($id, $redirect = null)
     {
         $result = $this->inbox_model->delete($id);
         if($result){
@@ -188,6 +188,11 @@ class Inbox extends CI_Controller
             $this->session->set_flashdata("operation", "danger");
             $this->session->set_flashdata("message", "Something is getting wrong");
         }
-        redirect("inbox");
+        if($redirect != null){
+            redirect($redirect);
+        }
+        else{
+            redirect("inbox");
+        }
     }
 }

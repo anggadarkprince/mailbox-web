@@ -79,9 +79,11 @@ class Page extends CI_Controller
 
     public function archive()
     {
+        $this->load->model("Archive_model","archive_model");
         $data = [
             'title' => "Archive",
             'page' => "mails/archive",
+            'archive' => $this->archive_model->archive(),
         ];
         $this->load->view('templates/template', $data);
     }
