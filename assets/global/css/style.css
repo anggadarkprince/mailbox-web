@@ -13155,3 +13155,6 @@ body.rtl .layout-options .img-sidebar-right {
 .fileinput.input-group > .btn-file {
   border-radius: 0 4px 4px 0 !important;
 }
+.alert {
+  padding: 10px 15px;
+}

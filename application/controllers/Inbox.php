@@ -74,7 +74,7 @@ class Inbox extends CI_Controller
                 }
                 else if($result["query"]){
                     $this->session->set_flashdata("operation", "success");
-                    $this->session->set_flashdata("message", "In-mail successfully created");
+                    $this->session->set_flashdata("message", "<strong>In-mail</strong> successfully created");
                     redirect("inbox");
                     return;
                 }
@@ -93,7 +93,7 @@ class Inbox extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
-    public function edit($id = null)
+    public function edit($id)
     {
         $data = [
             'title' => "Edit In-mail",
@@ -104,7 +104,7 @@ class Inbox extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
-    public function update()
+    public function update($id)
     {
         if($this->input->server('REQUEST_METHOD') == "POST")
         {
@@ -148,7 +148,7 @@ class Inbox extends CI_Controller
                 }
                 else if($result["query"]){
                     $this->session->set_flashdata("operation", "success");
-                    $this->session->set_flashdata("message", "In-mail successfully updated");
+                    $this->session->set_flashdata("message", "<strong>In-mail</strong> successfully updated");
                     redirect("inbox");
                     return;
                 }
@@ -163,11 +163,11 @@ class Inbox extends CI_Controller
         $data['title'] = "Edit In-mail";
         $data['page'] = "inbox/edit";
         $data['labels'] = $this->label_model->read();
-        $data['mail'] = $this->inbox_model->read($this->input->post("id"));
+        $data['mail'] = $this->inbox_model->read($id);
         $this->load->view('templates/template', $data);
     }
 
-    public function show($id = null)
+    public function show($id)
     {
         $data = [
             'title' => "Detail In-mail",
@@ -182,7 +182,7 @@ class Inbox extends CI_Controller
         $result = $this->inbox_model->delete($id);
         if($result){
             $this->session->set_flashdata("operation", "warning");
-            $this->session->set_flashdata("message", "In-mail successfully deleted");
+            $this->session->set_flashdata("message", "<strong>In-mail</strong> successfully deleted");
         }
         else{
             $this->session->set_flashdata("operation", "danger");

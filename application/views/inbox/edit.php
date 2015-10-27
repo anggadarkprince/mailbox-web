@@ -31,7 +31,7 @@
                 <?php } ?>
                 <!-- end of alert -->
 
-                <form action="<?=site_url()?>inbox/update.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+                <form action="<?=site_url()?>inbox/update/<?=$mail["id"]?>.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                     <div class="row">
                         <div class="col-md-6">
                             <input type="hidden" value="<?=$mail["id"]?>" name="id">

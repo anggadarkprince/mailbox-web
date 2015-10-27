@@ -692,3 +692,16 @@ $(window).resize(function() {
         maximizePanel();
     }, 100);
 });
+
+$(document).ready(function(){
+    var link_delete = "";
+    $(".btn-delete").click(function(e){
+        e.preventDefault();
+        link_delete = $(this).data("link");
+    });
+    $(".btn-delete-inbox").click(function(e){
+        if(link_delete != ""){
+            window.location.href = link_delete;
+        }
+    });
+});
