@@ -77,7 +77,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="description">Description</label>
                         <div class="col-sm-9">
-                            <textarea rows="4" name="description" id="description" class="form-control form-white" placeholder="Description and disposition shortly here..." required><?=set_value('signature', '');?></textarea>
+                            <textarea rows="4" name="description" id="description" class="form-control form-white" placeholder="Description and disposition shortly here..." required><?=set_value('description', '');?></textarea>
                         </div>
                     </div>
                     <div class="form-group">

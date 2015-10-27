@@ -15,57 +15,76 @@
                 <h3><i class="fa fa-envelope"></i> Edit <strong>Form</strong></h3>
             </div>
             <div class="panel-content">
-                <form action="#" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+
+                <!-- alert -->
+                <?php if(isset($operation)){ ?>
+                    <div class="alert alert-<?=$operation?>" role="alert">
+                        <p class="text-center"><?php echo $message; ?></p>
+                    </div>
+                <?php } ?>
+                <!-- end of alert -->
+
+                <!-- alert -->
+                <?php if($this->session->flashdata('operation') != NULL){ ?>
+                    <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
+                        <p class="text-center"><?=$this->session->flashdata('message'); ?></p>
+                    </div>
+                <?php } ?>
+                <!-- end of alert -->
+
+                <form action="<?=site_url()?>outbox/update/<?=$mail["id"]?>.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+                    <input type="hidden" value="<?=$mail["id"]?>" name="id">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Mail ID</label>
                         <div class="col-sm-9">
-                            <p class="form-control-static">#23</p>
+                            <p class="form-control-static">#<?=$mail['id']?></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="no_mail">No Surat</label>
                         <div class="col-sm-9 prepend-icon">
-                            <input type="text" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required>
+                            <input type="text" value="<?=set_value('no_mail', $mail['mail_number']);?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
                             <i class="icon-envelope"></i>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="subject">Perihal</label>
                         <div class="col-sm-9 prepend-icon">
-                            <input type="text" name="subject" id="subject" class="form-control form-white" placeholder="Enter mail subject here..." required>
+                            <input type="text" value="<?=set_value('subject', $mail['subject']);?>" name="subject" id="subject" class="form-control form-white" placeholder="Enter mail subject here..." required maxlength="300">
                             <i class="icon-pencil"></i>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="no_mail">Tanggal Surat</label>
+                        <label class="col-sm-3 control-label" for="mail_date">Tanggal Surat</label>
                         <div class="col-sm-9 prepend-icon">
-                            <input type="text" name="mail_date" class="date-picker form-control form-white" placeholder="Select a mail date...">
+                            <input type="text" value="<?=set_value('mail_date', date_format(date_create($mail['mail_date']), "m/d/Y"));?>" name="mail_date" id="mail_date" class="date-picker form-control form-white" placeholder="Select a mail date..." required>
                             <i class="icon-calendar"></i>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="from">From</label>
+                        <label class="col-sm-3 control-label" for="from">Dari</label>
                         <div class="col-sm-9 prepend-icon">
-                            <input type="text" name="from" id="from" class="form-control form-white" placeholder="Who Sender the mail..." required>
+                            <input type="text" value="<?=set_value('from', $mail['from']);?>" name="from" id="from" class="form-control form-white" placeholder="Who send the mail..." required maxlength="300">
                             <i class="icon-user"></i>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="to">To</label>
+                        <label class="col-sm-3 control-label" for="to">Kepada</label>
                         <div class="col-sm-9 prepend-icon">
-                            <input type="text" name="to" id="to" class="form-control form-white" placeholder="Who receiver the mail..." required>
+                            <input type="text" value="<?=set_value('to', $mail['to']);?>" name="to" id="to" class="form-control form-white" placeholder="Who receive the mail..." required maxlength="300">
                             <i class="icon-users"></i>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="description">Description</label>
                         <div class="col-sm-9">
-                            <textarea rows="4" name="description" id="description" class="form-control form-white" placeholder="Description and disposition shortly here..." required></textarea>
+                            <textarea rows="4" name="description" id="description" class="form-control form-white" placeholder="Description and disposition shortly here..." required><?=set_value('description', $mail['description']);?></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="attachment">File Surat</label>
                         <div class="col-sm-9">
+                            <p>Last Uploaded : <?=$mail["attachment"]?></p>
                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                 <div class="form-control form-white" data-trigger="fileinput">
                                     <i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span>
@@ -82,10 +101,11 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="label">Label</label>
                         <div class="col-sm-9">
-                            <select class="form-control form-white" name="label" id="label" data-style="white" data-placeholder="Select a label...">
-                                <option value="GENERAL">General</option>
-                                <option value="IMPORTANT">Important</option>
-                                <option value="SOON">Soon</option>
+                            <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
+                                <option value="" <?php echo set_select('label', ''); ?>>Select Label</option>
+                                <?php foreach($labels as $label): ?>
+                                    <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"], ($label['id'] == $mail['label_id']) ? true : false); ?>><?=$label['label']?></option>
+                                <?php endforeach ?>
                             </select>
                         </div>
                     </div>
