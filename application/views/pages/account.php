@@ -14,37 +14,58 @@
                 <h3><i class="fa fa-user"></i> Account <strong>Form</strong></h3>
             </div>
             <div class="panel-content">
-                <form action="#" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+
+                <!-- alert -->
+                <?php if(isset($operation)){ ?>
+                    <div class="alert alert-<?=$operation?>" role="alert">
+                        <p class="text-center"><?php echo $message; ?></p>
+                    </div>
+                <?php } ?>
+                <!-- end of alert -->
+
+                <!-- alert -->
+                <?php if($this->session->flashdata('operation') != NULL){ ?>
+                    <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
+                        <p><?=$this->session->flashdata('message'); ?></p>
+                    </div>
+                <?php } ?>
+                <!-- end of alert -->
+
+                <form action="<?=site_url()?>user/update.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Email</label>
                                 <div class="col-sm-8">
-                                    <label class="form-control-static">anggadarkprince@gmail.com</label>
+                                    <label class="form-control-static"><?=$account['email']?></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Username</label>
                                 <div class="col-sm-8">
-                                    <label class="form-control-static">angga17kireina</label>
+                                    <label class="form-control-static"><?=$account['username']?></label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="firstname">First Name</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="firstname" id="firstname" class="form-control form-white" placeholder="Enter your first name here..." required>
+                                    <input type="text" value="<?=set_value("firstname", explode(" ", $account['name'])[0])?>" name="firstname" id="firstname" class="form-control form-white" placeholder="Enter your first name here..." required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="lastname">Last Name</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="lastname" id="lastname" class="form-control form-white" placeholder="Enter your last name here..." required>
+                                    <?php
+                                    $name = explode(" ", $account['name']);
+                                    array_shift($name);
+                                    ?>
+                                    <input type="text" value="<?=set_value("lastname", implode(" ", $name))?>" name="lastname" id="lastname" class="form-control form-white" placeholder="Enter your last name here..." required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="about">About</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="5" name="about" id="about" class="form-control form-white" placeholder="Story about you shortly here..." required></textarea>
+                                    <textarea rows="5" name="about" id="about" class="form-control form-white" placeholder="Story about you shortly here..." required><?=set_value("about", $account['about'])?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -52,8 +73,18 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <div class="icheck-inline">
-                                            <label><input type="radio" name="gender" id="male" value="MALE" data-radio="iradio_square-blue" checked> Male</label>
-                                            <label><input type="radio" name="gender" dirname="female" value="FEMALE" data-radio="iradio_square-blue"> Female</label>
+                                            <?php
+                                            $male = false;
+                                            $female = false;
+                                            if($account["gender"] == "MALE"){
+                                                $male = true;
+                                            }
+                                            else{
+                                                $female = true;
+                                            }
+                                            ?>
+                                            <label><input type="radio" name="gender" id="male" value="MALE" data-radio="iradio_square-blue" <?=set_radio('gender', "MALE", $male);?> class="required"> Male</label>
+                                            <label><input type="radio" name="gender" id="female" value="FEMALE" data-radio="iradio_square-blue" <?=set_radio('gender', "FEMALE", $female);?>> Female</label>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +96,7 @@
                                 <div class="col-sm-8">
                                     <div class="fileinput fileinput-new" data-provides="fileinput">
                                         <div class="fileinput-new thumbnail">
-                                            <img data-src="" src="<?=base_url()?>assets/global/images/profil_page/friend3.jpg" class="img-responsive" style="max-width: 130px" alt="gallery 3">
+                                            <img data-src="" src="<?=base_url()?>assets/global/images/avatars/<?=$account['avatar']?>" class="img-responsive" style="max-width: 130px" alt="gallery 3">
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                         <div>

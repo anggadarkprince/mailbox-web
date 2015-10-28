@@ -13164,7 +13164,7 @@ body.rtl .layout-options .img-sidebar-right {
 .sidebar .sidebar-inner .sidebar-widgets .icon-lock {
   color: #FFF;
 }
-.sidebar .sidebar-inner .sidebar-widgets .folders {
+.sidebar .sidebar-inner .sidebar-widgets .folders li{
   color: #FFF;
   opacity: 0.62;
 }
@@ -13174,4 +13174,9 @@ body.rtl .layout-options .img-sidebar-right {
 .user-details h4{
   line-height: normal;
   margin-top: 5px;
+}
+
+.sidebar .sidebar-inner .sidebar-widgets .folders li.active{
+  color: #FFF;
+  opacity: 1 !important;
 }

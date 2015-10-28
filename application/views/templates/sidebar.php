@@ -47,6 +47,12 @@ if(isset($title)){
             $report_active = "active";
             $all_active = "active";
             break;
+        case "Settings":
+            $setting_active = "active";
+            break;
+        case "Account":
+            $account_active = "active";
+            break;
     }
 }
 

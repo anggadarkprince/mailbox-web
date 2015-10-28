@@ -41,7 +41,7 @@ class Setting_model extends CI_Model
         } else {
             $config = array(
                 'allowed_types' => 'jpg|jpeg|gif|png',
-                'upload_path' => "./assets/img/layout",
+                'upload_path' => "./assets/global/images",
                 'max_size' => 512,
                 'max_width' => '256',
                 'max_height' => '256',

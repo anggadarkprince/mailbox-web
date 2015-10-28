@@ -71,6 +71,9 @@ $route['report'] = 'report/index';
 $route['report/today'] = 'report/today';
 $route['report/week'] = 'report/week';
 
+$route['settings'] = 'setting/index';
+$route['account'] = 'user/account';
+
 $route['login'] = 'page/login';
 $route['register'] = 'page/register';
 $route['logout'] = 'page/logout';
