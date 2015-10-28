@@ -12,6 +12,9 @@ function get_mail(){
     return $CI->report->get_report_today();
 }
 
-function get_notification(){
-
+function get_setting($link){
+    $CI = get_instance();
+    $CI->load->model("Setting_model","setting");
+    $setting = $CI->setting->read();
+    return $setting[$link];
 }

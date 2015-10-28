@@ -68,4 +68,19 @@ class Report_model extends CI_Model
         return $result->result_array();
     }
 
+    public function chart()
+    {
+        $result = $this->db->query("
+          SELECT all_date, COUNT(inbox.id) AS inbox, COUNT(outbox.id) AS outbox
+          FROM (SELECT DISTINCT mail_date AS all_date FROM inbox UNION SELECT mail_date FROM outbox) date
+          LEFT JOIN inbox ON inbox.mail_date = all_date
+          LEFT JOIN outbox ON outbox.mail_date = all_date
+          GROUP BY all_date
+          ORDER BY all_date DESC
+          LIMIT 7
+        ");
+
+        return $result->result_array();
+    }
+
 }

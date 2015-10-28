@@ -81,12 +81,17 @@ class Page extends CI_Controller
             redirect("lockscreen");
         }
         $this->load->model("User_model","user_model");
+        $this->load->model("Report_model","report_model");
         if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
         {
             redirect("login");
         }
         else{
-            $data = ['title' => "Dashboard", "page" => "pages/dashboard"];
+            $data = [
+                'title' => "Dashboard",
+                'page' => "pages/dashboard",
+                'chart' => $this->report_model->chart()
+            ];
             $this->load->view('templates/template', $data);
         }
     }

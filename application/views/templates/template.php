@@ -240,6 +240,8 @@
 <script src="<?= base_url() ?>assets/global/js/pages/table_dynamic.js"></script>
 <script src="<?= base_url() ?>assets/global/plugins/bootstrap-tags-input/bootstrap-tagsinput.min.js"></script> <!-- Select Inputs -->
 <script src="<?= base_url() ?>assets/global/plugins/dropzone/dropzone.min.js"></script>  <!-- Upload Image & File in dropzone -->
+<script src="<?= base_url() ?>assets/global/plugins/charts-chartjs/Chart.min.js"></script>  <!-- ChartJS Chart -->
+
 <!-- END PAGE SCRIPT -->
 <script src="<?= base_url() ?>assets/admin/layout1/js/layout.js"></script>
 <script type="text/javascript">if (self == top) {
@@ -269,5 +271,65 @@
         });
     }
     ;</script>
+
+<?php
+if(isset($chart)){
+    ?>
+
+    <script>
+        $(function () {
+            var lineChartData = {
+                labels : [
+                    <?php
+                        foreach($chart as $row):
+                        echo "'".$row["all_date"]."',";
+                        endforeach;
+                    ?>
+                ],
+                datasets : [
+                    {
+                        label: "Outbox",
+                        fillColor : "rgba(220,220,220,0.2)",
+                        strokeColor : "rgba(220,220,220,1)",
+                        pointColor : "rgba(220,220,220,1)",
+                        pointStrokeColor : "#fff",
+                        pointHighlightFill : "#fff",
+                        pointHighlightStroke : "rgba(220,220,220,1)",
+                        data : [
+                            <?php
+                                foreach($chart as $row):
+                                echo $row["outbox"].",";
+                                endforeach;
+                            ?>
+                        ]
+                    },
+                    {
+                        label: "Inbox",
+                        fillColor : "rgba(49, 157, 181,0.2)",
+                        strokeColor : "#319DB5",
+                        pointColor : "#319DB5",
+                        pointStrokeColor : "#fff",
+                        pointHighlightFill : "#fff",
+                        pointHighlightStroke : "#319DB5",
+                        data : [
+                            <?php
+                                foreach($chart as $row):
+                                echo $row["inbox"].",";
+                                endforeach;
+                            ?>
+                        ]
+                    }
+                ]
+            }
+            var ctx = document.getElementById("line-chart").getContext("2d");
+            window.myLine = new Chart(ctx).Line(lineChartData, {
+                responsive: true,
+                tooltipCornerRadius: 0
+            });
+        });
+    </script>
+<?php
+}
+?>
 </body>
 </html>
