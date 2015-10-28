@@ -25,42 +25,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>25 January 2015</td>
-                        <td>30</td>
-                        <td>43</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>26 January 2015</td>
-                        <td>23</td>
-                        <td>64</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>27 January 2015</td>
-                        <td>53</td>
-                        <td>63</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>28 January 2015</td>
-                        <td>15</td>
-                        <td>13</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>29 January 2015</td>
-                        <td>6</td>
-                        <td>61</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>30 January 2015</td>
-                        <td>45</td>
-                        <td>42</td>
-                    </tr>
+                    <?php $no = 1; ?>
+                    <?php foreach($report as $mail): ?>
+                        <tr>
+                            <td><?=$no++?></td>
+                            <td><?=date_format(date_create($mail['all_date']), "d F Y")?></td>
+                            <td><?=$mail['inbox']?></td>
+                            <td><?=$mail['outbox']?></td>
+                        </tr>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
