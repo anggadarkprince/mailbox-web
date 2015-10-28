@@ -79,7 +79,7 @@
                 <div class="border-bottom">
                     <h3><i class="fa fa-envelope"></i> Mail Number <strong><?=$mail['mail_number']?></strong> <span class="label label-danger pull-right">Important</span></h3>
                 </div>
-                <div>
+                <div class="report">
                     <form class="form-horizontal">
                         <div class="row">
                             <div class="col-md-6">

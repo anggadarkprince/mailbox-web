@@ -13158,3 +13158,6 @@ body.rtl .layout-options .img-sidebar-right {
 .alert {
   padding: 10px 15px;
 }
+.report .form-group{
+  margin-bottom: 0;
+}

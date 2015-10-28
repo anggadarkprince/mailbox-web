@@ -60,7 +60,7 @@ class Inbox_model extends CI_Model
     {
         if ($id == null) {
             $result = $this->db
-                ->select("inbox.*, labels.label, labels.description")
+                ->select("inbox.*, labels.label")
                 ->from($this->table)
                 ->join("labels", "label_id = labels.id")
                 ->order_by('mail_date', 'DESC')
@@ -68,7 +68,7 @@ class Inbox_model extends CI_Model
             return $result->result_array();
         } else {
             $result = $this->db
-                ->select("inbox.*, labels.label, labels.description")
+                ->select("inbox.*, labels.label")
                 ->from($this->table)
                 ->join("labels", "label_id = labels.id")
                 ->where($this->table.".".$this->pk, $id)
