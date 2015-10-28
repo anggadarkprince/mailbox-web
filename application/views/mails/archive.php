@@ -10,9 +10,6 @@
 <div class="row">
     <div class="col-md-12 portlets">
         <div class="panel">
-            <div class="panel-header panel-controls">
-                <h3><i class="fa fa-envelope"></i> Archive <strong>List</strong></h3>
-            </div>
             <div class="panel-content">
 
                 <!-- alert -->

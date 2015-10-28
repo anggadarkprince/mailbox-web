@@ -13161,3 +13161,17 @@ body.rtl .layout-options .img-sidebar-right {
 .report .form-group{
   margin-bottom: 0;
 }
+.sidebar .sidebar-inner .sidebar-widgets .icon-lock {
+  color: #FFF;
+}
+.sidebar .sidebar-inner .sidebar-widgets .folders {
+  color: #FFF;
+  opacity: 0.62;
+}
+.sidebar .sidebar-inner .nav-sidebar {
+  margin-bottom: 15px;
+}
+.user-details h4{
+  line-height: normal;
+  margin-top: 5px;
+}

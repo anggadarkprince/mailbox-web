@@ -1,3 +1,56 @@
+<?php
+
+$dashboard_active = "";
+$mailbox_active = "";
+$inbox_active = "";
+$outbox_active = "";
+$archive_active = "";
+$report_active = "";
+$today_active = "";
+$week_active = "";
+$all_active = "";
+$setting_active = "";
+$account_active = "";
+
+if(isset($title)){
+    switch($title){
+        case "Dashboard":
+            $dashboard_active = "active";
+            break;
+        case "Create In-mail":
+        case "Edit In-mail":
+        case "Detail In-mail":
+        case "Inbox":
+            $mailbox_active = "active";
+            $inbox_active = "active";
+            break;
+        case "Create Out-mail":
+        case "Edit Out-mail":
+        case "Detail Out-mail":
+        case "Outbox":
+            $mailbox_active = "active";
+            $outbox_active = "active";
+            break;
+        case "Archive":
+            $mailbox_active = "active";
+            $archive_active = "active";
+            break;
+        case "Today":
+            $report_active = "active";
+            $today_active = "active";
+            break;
+        case "Weekly":
+            $report_active = "active";
+            $week_active = "active";
+            break;
+        case "Report":
+            $report_active = "active";
+            $all_active = "active";
+            break;
+    }
+}
+
+?>
 <!-- BEGIN SIDEBAR -->
 <div class="sidebar">
     <div class="logopanel">
@@ -15,7 +68,7 @@
                 <i class="icon icons-faces-users-01"></i>
 
                 <div class="user-details">
-                    <h4>Angga Ari</h4>
+                    <h4><?=$this->session->userdata(User_model::$SESSION_NAME)?></h4>
 
                     <div class="dropdown user-login">
                         <button class="btn btn-xs dropdown-toggle btn-rounded" type="button" data-toggle="dropdown"
@@ -46,22 +99,21 @@
             </div>
         </div>
         <ul class="nav nav-sidebar">
-            <li class=" nav-active active"><a href="<?=site_url()?>dashboard.html"><i class="icon-home"></i><span>Dashboard</span></a>
-            </li>
-            <li class="nav-parent">
+            <li class="<?=$dashboard_active?>"><a href="<?=site_url()?>dashboard.html"><i class="icon-home"></i><span>Dashboard</span></a></li>
+            <li class="nav-parent <?=$mailbox_active?>">
                 <a href="#"><i class="icon-envelope"></i><span>Mailbox</span> <span class="fa arrow"></span></a>
                 <ul class="children collapse">
-                    <li><a href="<?=site_url()?>inbox.html"> Inbox</a></li>
-                    <li><a href="<?=site_url()?>outbox.html"> Outbox</a></li>
-                    <li><a href="<?=site_url()?>archive.html"> Archive</a></li>
+                    <li class="<?=$inbox_active?>"><a href="<?=site_url()?>inbox.html"> Inbox</a></li>
+                    <li class="<?=$outbox_active?>"><a href="<?=site_url()?>outbox.html"> Outbox</a></li>
+                    <li class="<?=$archive_active?>"><a href="<?=site_url()?>archive.html"> Archive</a></li>
                 </ul>
             </li>
-            <li class="nav-parent">
+            <li class="nav-parent <?=$report_active?>">
                 <a href="#"><i class="icon-bar-chart"></i><span>Report</span> <span class="fa arrow"></span></a>
                 <ul class="children collapse">
-                    <li><a href="<?=site_url()?>report/today.html"> Today</a></li>
-                    <li><a href="<?=site_url()?>report/week.html"> Last Week</a></li>
-                    <li><a href="<?=site_url()?>report.html"> All</a></li>
+                    <li class="<?=$today_active?>"><a href="<?=site_url()?>report/today.html"> Today</a></li>
+                    <li class="<?=$week_active?>"><a href="<?=site_url()?>report/week.html"> Last Week</a></li>
+                    <li class="<?=$all_active?>"><a href="<?=site_url()?>report.html"> All</a></li>
                 </ul>
             </li>
         </ul>
@@ -69,10 +121,10 @@
         <div class="sidebar-widgets">
             <p class="menu-title widget-title">Configurations</p>
             <ul class="folders">
-                <li>
+                <li class="<?=$setting_active?>">
                     <a href="<?= site_url() ?>settings.html"><i class="icon-settings"></i>Settings</a>
                 </li>
-                <li>
+                <li class="<?=$account_active?>">
                     <a href="<?= site_url() ?>account.html"><i class="icon-user"></i>My Account</a>
                 </li>
                 <li>

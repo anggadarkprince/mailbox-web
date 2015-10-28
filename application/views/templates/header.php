@@ -178,8 +178,8 @@
             <!-- BEGIN USER DROPDOWN -->
             <li class="dropdown" id="user-header">
                 <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img src="<?= base_url() ?>assets/global/images/avatars/user1.png" alt="user image">
-                    <span class="username">Hi, Angga Ari</span>
+                    <img src="<?= base_url() ?>assets/global/images/avatars/<?=$this->session->userdata(User_model::$SESSION_AVATAR)?>" alt="user image">
+                    <span class="username">Hi, <?=$this->session->userdata(User_model::$SESSION_NAME)?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
