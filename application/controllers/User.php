@@ -13,6 +13,10 @@ class User extends CI_Controller
         parent::__construct();
 
         $this->load->model("User_model","user_model");
+
+        if($this->session->userdata(User_model::$SESSION_LOCK) != null){
+            redirect("lockscreen");
+        }
     }
 
     public function auth()
@@ -112,6 +116,11 @@ class User extends CI_Controller
 
     public function account()
     {
+        if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("login");
+        }
+
         $data = [
             'title' => "Account",
             'page' => "pages/account",
@@ -122,6 +131,11 @@ class User extends CI_Controller
 
     public function update()
     {
+        if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("login");
+        }
+
         if($this->input->server('REQUEST_METHOD') == "POST")
         {
             $this->form_validation->set_rules('firstname', 'Name', 'required|max_length[50]');

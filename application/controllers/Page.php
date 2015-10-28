@@ -12,6 +12,8 @@ class Page extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        $this->load->model("User_model","user_model");
     }
 
     public function index()
@@ -25,7 +27,6 @@ class Page extends CI_Controller
             show_404();
         }
 
-        $this->load->model("User_model","user_model");
         if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
         {
             redirect("login");
@@ -40,8 +41,25 @@ class Page extends CI_Controller
 
     public function lockscreen()
     {
+        $this->session->set_userdata(User_model::$SESSION_LOCK, true);
         $data = ['title' => "Lockscreen"];
         $this->load->view('pages/lockscreen', $data);
+    }
+
+    public function unlock()
+    {
+        $username = $this->session->userdata(User_model::$SESSION_USERNAME);
+        $password = $this->input->post("password");
+        $this->load->model("User_model","user_model");
+        if($this->user_model->authentication($username, $password)){
+            $this->session->unset_userdata(User_model::$SESSION_LOCK);
+            redirect("dashboard");
+        }
+        else{
+            $this->session->set_flashdata("operation", "warning");
+            $this->session->set_flashdata("message", "<strong>Password</strong> mismatch with ".$username." account");
+            redirect("lockscreen");
+        }
     }
 
     public function login()
@@ -54,6 +72,22 @@ class Page extends CI_Controller
         else{
             $data = ['title' => "Login"];
             $this->load->view('pages/login', $data);
+        }
+    }
+
+    public function dashboard()
+    {
+        if($this->session->userdata(User_model::$SESSION_LOCK) != null){
+            redirect("lockscreen");
+        }
+        $this->load->model("User_model","user_model");
+        if(!User_model::is_authorize(User_model::$TYPE_ADM) && !User_model::is_authorize(User_model::$TYPE_DEV))
+        {
+            redirect("login");
+        }
+        else{
+            $data = ['title' => "Dashboard", "page" => "pages/dashboard"];
+            $this->load->view('templates/template', $data);
         }
     }
 
@@ -79,6 +113,9 @@ class Page extends CI_Controller
 
     public function archive()
     {
+        if($this->session->userdata(User_model::$SESSION_LOCK) != null){
+            redirect("lockscreen");
+        }
         $this->load->model("Archive_model","archive_model");
         $data = [
             'title' => "Archive",

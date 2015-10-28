@@ -18,6 +18,9 @@ class Report extends CI_Controller
         {
             redirect("login");
         }
+        if($this->session->userdata(User_model::$SESSION_LOCK) != null){
+            redirect("lockscreen");
+        }
     }
 
     public function index()

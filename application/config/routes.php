@@ -74,10 +74,12 @@ $route['report/week'] = 'report/week';
 $route['settings'] = 'setting/index';
 $route['account'] = 'user/account';
 
+$route['dashboard'] = 'page/dashboard';
 $route['login'] = 'page/login';
 $route['register'] = 'page/register';
 $route['logout'] = 'page/logout';
 $route['lockscreen'] = 'page/lockscreen';
+$route['unlock'] = 'page/unlock';
 $route['(:any)'] = 'page/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

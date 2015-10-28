@@ -27,11 +27,20 @@
         <div class="col-md-8 col-md-offset-1">
             <div class="account-wall">
                 <div class="user-image">
-                    <img src="<?= base_url() ?>assets/global/images/profil_page/friend1.jpg" class="img-responsive img-circle" alt="friend 8">
+                    <img src="<?= base_url() ?>assets/global/images/avatars/<?=$this->session->userdata(User_model::$SESSION_AVATAR)?>" class="img-responsive img-circle" alt="friend 8">
                     <div id="loader"></div>
                 </div>
-                <form class="form-signin" role="form">
-                    <h2>Welcome back, <strong>Bryan</strong>!</h2>
+                <form action="<?=site_url()?>unlock.html" method="post" class="form-signin" role="form">
+
+                    <!-- alert -->
+                    <?php if($this->session->flashdata('operation') != NULL){ ?>
+                        <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
+                            <p style="color: #000000 !important;"><?=$this->session->flashdata('message'); ?></p>
+                        </div>
+                    <?php } ?>
+                    <!-- end of alert -->
+
+                    <h2>Welcome back, <strong><?=$this->session->userdata(User_model::$SESSION_NAME)?></strong>!</h2>
 
                     <p>Enter your password to go to dashboard.</p>
 

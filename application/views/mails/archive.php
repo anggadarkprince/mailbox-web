@@ -48,9 +48,9 @@
                                 $type = "outbox";
                             }
                             ?>
-                            <td><a href="<?=site_url().$type?>/show">Detail</a></td>
+                            <td><a href="<?=site_url().$type?>/show/<?=$mail['id']?>.html">Detail</a></td>
                             <td>
-                                <a href="<?=site_url().$type?>/edit" class="btn btn-primary btn-sm m-r-0">EDIT</a>
+                                <a href="<?=site_url().$type?>/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0">EDIT</a>
                                 <a href="#modal-delete" data-link="<?=site_url().$type?>/delete/<?=$mail['id']?>/archive.html" data-toggle="modal" class="btn btn-danger btn-sm m-l-0 btn-delete">DELETE</a>
                             </td>
                         </tr>

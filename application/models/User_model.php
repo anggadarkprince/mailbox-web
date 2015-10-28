@@ -19,6 +19,7 @@ class User_model extends CI_Model
     public static $SESSION_NAME = "mail-name";
     public static $SESSION_AVATAR = "mail-avatar";
     public static $SESSION_ROLE = "mail-role";
+    public static $SESSION_LOCK = "mail-lock";
 
     public function __construct()
     {
@@ -73,6 +74,7 @@ class User_model extends CI_Model
         $this->session->unset_userdata(User_model::$SESSION_ID);
         $this->session->unset_userdata(User_model::$SESSION_AVATAR);
         $this->session->unset_userdata(User_model::$SESSION_NAME);
+        $this->session->unset_userdata(User_model::$SESSION_LOCK);
     }
 
     public function check_existing_username($username)
