@@ -25,10 +25,10 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Mail Number</th>
-                        <th>Subject</th>
-                        <th>To</th>
-                        <th>Date</th>
+                        <th>Surat</th>
+                        <th>Perihal</th>
+                        <th>Kepada</th>
+                        <th>Tanggal</th>
                         <th>Detail</th>
                         <th width="150">Action</th>
                     </tr>
@@ -41,7 +41,7 @@
                             <td><?=$mail['mail_number']?></td>
                             <td><?=word_limiter($mail['subject'], 5)?></td>
                             <td><?=$mail['to']?></td>
-                            <td><?=date_format(date_create($mail['mail_date']), "d F Y")?></td>
+                            <td><?=date_format(date_create($mail['mail_date']), "d M Y")?></td>
                             <td><a href="<?=site_url()?>outbox/show/<?=$mail['id']?>.html">Detail</a></td>
                             <td>
                                 <a href="<?=site_url()?>outbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0">EDIT</a>

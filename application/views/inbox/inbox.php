@@ -25,12 +25,13 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Mail Number</th>
-                        <th>Subject</th>
-                        <th>Date</th>
+                        <th>Surat</th>
+                        <th>Perihal</th>
+                        <th>Tanggal</th>
+                        <th>Dari</th>
+                        <th>Kepada</th>
                         <th>Detail</th>
-                        <th>Label</th>
-                        <th width="150">Action</th>
+                        <th width="120">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,27 +41,14 @@
                         <tr>
                             <td><?=$no++?></td>
                             <td><?=$mail['mail_number']?></td>
-                            <td><?=word_limiter($mail['subject'], 5)?></td>
-                            <td><?=date_format(date_create($mail['mail_date']), "d F Y")?></td>
+                            <td><?=word_limiter($mail['subject'], 4)?></td>
+                            <td><?=date_format(date_create($mail['mail_date']), "d M Y")?></td>
+                            <td><?=$mail['from']?></td>
+                            <td><?=$mail['to']?></td>
                             <td><a href="<?=site_url()?>inbox/show/<?=$mail['id']?>.html">Detail</a></td>
                             <td>
-                                <?php
-                                $label = "success";
-                                if($mail["label"] == "IMPORTANT"){
-                                    $label = "danger";
-                                }
-                                else if($mail["label"] == "SOON"){
-                                    $label = "warning";
-                                }
-                                else if($mail["label"] == "GENERAL"){
-                                    $label = "primary";
-                                }
-                                ?>
-                                <span class="label label-<?=$label?>"><?=$mail['label']?></span>
-                            </td>
-                            <td>
-                                <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0">EDIT</a>
-                                <a href="#modal-delete" data-link="<?=site_url()?>inbox/delete/<?=$mail['id']?>.html" data-toggle="modal" class="btn btn-danger btn-sm m-l-0 btn-delete">DELETE</a>
+                                <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0"><i class="icon-pencil"></i></a>
+                                <a href="#modal-delete" data-link="<?=site_url()?>inbox/delete/<?=$mail['id']?>.html" data-toggle="modal" class="btn btn-danger btn-sm m-l-0 btn-delete"><i class="icon-trash"></i></a>
                             </td>
                         </tr>
 
