@@ -17,9 +17,9 @@
             <div class="panel-content">
                 <form action="#" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Mail ID</label>
+                        <label class="col-sm-3 control-label">No Agenda</label>
                         <div class="col-sm-9">
-                            <p class="form-control-static">#<?=$mail['id']?></p>
+                            <p class="form-control-static">#<?=$mail['agenda_number']?></p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -61,7 +61,10 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="attachment">File Surat</label>
                         <div class="col-sm-9">
-                            <p class="form-control-static"><a href="<?=base_url()?>assets/global/file/<?=$mail['attachment']?>">DOWNLOAD</a></p>
+                            <?=count($attachment_original) == 0 ? "<p class='m-t-10'>No File Available</p>" : "" ?>
+                            <?php foreach($attachment_original as $attachment): ?>
+                                <p class="form-control-static"><a href="<?=base_url()?>assets/global/file/<?=$attachment['resource']?>"><?=$attachment['resource']?></a></p>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +91,6 @@
                 <a href="<?=site_url()?>outbox.html" class="btn btn-default btn-embossed"><i class="fa fa-chevron-left"></i> Back</a>
                 <a href="#modal-delete" data-link="<?=site_url()?>outbox/delete/<?=$mail['id']?>.html" data-toggle="modal" class="btn btn-danger btn-embossed pull-right btn-delete"><i class="fa fa-trash"></i> Delete</a>
                 <a href="<?=site_url()?>outbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-pencil"></i> Edit</a>
-                <a href="<?=site_url()?>outbox/print/<?=$mail['id']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-print"></i> Print</a>
             </div>
         </div>
     </div>

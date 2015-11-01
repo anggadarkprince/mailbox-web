@@ -114,6 +114,12 @@ class Outbox_model extends CI_Model
         }
     }
 
+    public function read_attachment($mail, $type)
+    {
+        $result = $this->db->get_where('outbox_attachment', ['outbox_id' => $mail, 'type' => $type]);
+        return $result->result_array();
+    }
+
     public function update($mail, $id)
     {
         $status = array();

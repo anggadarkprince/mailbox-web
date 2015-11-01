@@ -174,6 +174,7 @@ class Outbox extends CI_Controller
             'title' => "Detail Out-mail",
             'page' => "outbox/show",
             'mail' => $this->outbox_model->read($id),
+            'attachment_original' => $this->outbox_model->read_attachment($id, 'ORIGINAL'),
         ];
         $this->load->view('templates/template', $data);
     }
