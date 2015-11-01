@@ -105,6 +105,7 @@ class Inbox_model extends CI_Model
                 ->from($this->table)
                 ->join("labels", "label_id = labels.id")
                 ->order_by('mail_date', 'DESC')
+                ->order_by('id', 'DESC')
                 ->get();
             return $result->result_array();
         } else {

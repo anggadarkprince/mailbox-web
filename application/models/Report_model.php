@@ -21,16 +21,25 @@ class Report_model extends CI_Model
             ->from("outbox")
             ->join("labels", "label_id = labels.id")
             ->order_by('mail_date', 'DESC')
-            ->get();
+            ->get()->result_array();
 
         $inbox = $this->db
             ->select("inbox.*, labels.label")
             ->from('inbox')
             ->join("labels", "label_id = labels.id")
             ->order_by('mail_date', 'DESC')
-            ->get();
+            ->get()->result_array();
 
-        return ["outbox" => $outbox->result_array(), "inbox" => $inbox->result_array()];
+        for($i = 0; $i < count($inbox); $i++){
+            $inbox[$i]['attachment_original'] = $this->db->get_where('inbox_attachment', ['inbox_id' => $inbox[$i]['id'], 'type' => 'ORIGINAL'])->result_array();
+            $inbox[$i]['attachment_signature'] = $this->db->get_where('inbox_attachment', ['inbox_id' => $inbox[$i]['id'], 'type' => 'SIGNATURE'])->result_array();
+        }
+
+        for($i = 0; $i < count($outbox); $i++){
+            $outbox[$i]['attachment_original'] = $this->db->get_where('outbox_attachment', ['outbox_id' => $outbox[$i]['id'], 'type' => 'ORIGINAL'])->result_array();
+        }
+
+        return ["outbox" => $outbox, "inbox" => $inbox];
     }
 
     public function get_report_weekly()
