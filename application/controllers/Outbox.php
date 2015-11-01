@@ -103,6 +103,7 @@ class Outbox extends CI_Controller
             'page' => "outbox/edit",
             'labels' => $this->label_model->read(),
             'mail' => $this->outbox_model->read($id),
+            'attachment_original' => $this->outbox_model->read_attachment($id, 'ORIGINAL')
         ];
         $this->load->view('templates/template', $data);
     }
@@ -111,7 +112,8 @@ class Outbox extends CI_Controller
     {
         if($this->input->server('REQUEST_METHOD') == "POST")
         {
-            $this->form_validation->set_rules('no_mail', 'No Surat', 'trim|required');
+            $this->form_validation->set_rules('id', 'Mail ID unavailable', 'trim|required');
+            $this->form_validation->set_rules('no_agenda', 'No Agenda', 'trim|required');
             $this->form_validation->set_rules('subject', 'Perihal', 'trim|required|max_length[300]');
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
             $this->form_validation->set_rules('from', 'Dari', 'trim|required|max_length[300]');
@@ -130,12 +132,12 @@ class Outbox extends CI_Controller
             {
                 $data = [
                     'subject' => $this->input->post('subject'),
+                    'agenda_number' => $this->input->post('no_agenda'),
                     'mail_number' => $this->input->post('no_mail'),
                     'mail_date' => date_format(date_create($this->input->post('mail_date')), "Y-m-d"),
                     'from' => $this->input->post('from'),
                     'to' => $this->input->post('to'),
                     'description' => $this->input->post('description'),
-                    'attachment' => $_FILES["attachment"]["name"],
                     'label_id' => $this->input->post('label'),
                     'user_id' => $this->session->userdata(User_model::$SESSION_ID),
                 ];
@@ -174,7 +176,7 @@ class Outbox extends CI_Controller
             'title' => "Detail Out-mail",
             'page' => "outbox/show",
             'mail' => $this->outbox_model->read($id),
-            'attachment_original' => $this->outbox_model->read_attachment($id, 'ORIGINAL'),
+            'attachment_original' => $this->outbox_model->read_attachment($id, 'ORIGINAL')
         ];
         $this->load->view('templates/template', $data);
     }
@@ -196,5 +198,19 @@ class Outbox extends CI_Controller
         else{
             redirect("outbox");
         }
+    }
+
+    public function delete_attachment($id, $mail)
+    {
+        $result = $this->outbox_model->delete_attachment($id);
+        if($result){
+            $this->session->set_flashdata("operation", "warning");
+            $this->session->set_flashdata("message", "<strong>Attachment</strong> successfully deleted");
+        }
+        else{
+            $this->session->set_flashdata("operation", "danger");
+            $this->session->set_flashdata("message", "Something is getting wrong");
+        }
+        redirect("outbox/edit/".$mail);
     }
 }

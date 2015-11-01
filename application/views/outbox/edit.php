@@ -19,7 +19,7 @@
                 <!-- alert -->
                 <?php if(isset($operation)){ ?>
                     <div class="alert alert-<?=$operation?>" role="alert">
-                        <p class="text-center"><?php echo $message; ?></p>
+                        <p><?php echo $message; ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
@@ -27,7 +27,7 @@
                 <!-- alert -->
                 <?php if($this->session->flashdata('operation') != NULL){ ?>
                     <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
-                        <p class="text-center"><?=$this->session->flashdata('message'); ?></p>
+                        <p><?=$this->session->flashdata('message'); ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
@@ -35,9 +35,10 @@
                 <form action="<?=site_url()?>outbox/update/<?=$mail["id"]?>.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                     <input type="hidden" value="<?=$mail["id"]?>" name="id">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Mail ID</label>
-                        <div class="col-sm-9">
-                            <p class="form-control-static">#<?=$mail['id']?></p>
+                        <label class="col-sm-3 control-label" for="no_agenda">No Agenda</label>
+                        <div class="col-sm-9 prepend-icon">
+                            <input type="text" value="<?=set_value('no_agenda', $mail['agenda_number']);?>" name="no_agenda" id="no_agenda" class="form-control form-white" placeholder="Enter agenda number here..." required maxlength="100">
+                            <i class="icon-envelope"></i>
                         </div>
                     </div>
                     <div class="form-group">
@@ -82,23 +83,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="attachment">File Surat</label>
-                        <div class="col-sm-9">
-                            <p>Last Uploaded : <?=$mail["attachment"]?></p>
-                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                <div class="form-control form-white" data-trigger="fileinput">
-                                    <i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span>
-                                </div>
-                                        <span class="input-group-addon btn btn-default btn-file">
-                                            <span class="fileinput-new">Choose...</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="attachment" id="attachment">
-                                        </span>
-                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-3 control-label" for="label">Label</label>
                         <div class="col-sm-9">
                             <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
@@ -109,13 +93,53 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label">File Surat
+                            <span class="pull-right"> &nbsp; <a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
+                        </label>
+                        <div class="col-sm-12">
+                            <p>Last Uploaded :</p>
+                            <ol class="m-l-20 original-uploaded">
+                                <?php foreach($attachment_original as $attachment): ?>
+                                    <li>
+                                        <p class="form-control-static">
+                                            <a href="<?=base_url()?>assets/global/file/<?=$attachment['resource']?>"><?=$attachment['resource']?></a>
+                                            <a href="#modal-delete" data-link="<?=site_url()?>outbox/delete_attachment/<?=$attachment['id']?>/<?=$mail["id"]?>.html" data-toggle="modal" class="pull-right btn-delete">HAPUS</a>
+                                        </p>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ol>
+                        </div>
+                        <div class="col-sm-12 m-t-10 original-nofile">No original file enclosed</div>
+                        <div class="col-sm-12 m-t-10 original-container"></div>
+                    </div>
                     <div class="form-group text-right">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary pull-right btn-embossed m-t-20">Update Out-Mail</button>
-                            <a href="<?=site_url()?>outbox.html" class="btn btn-default pull-right btn-embossed m-t-20">Back</a>
+                            <hr>
+                            <button type="submit" class="btn btn-primary pull-right btn-embossed">Update Out-Mail</button>
+                            <a href="<?=site_url()?>outbox.html" class="btn btn-default pull-right btn-embossed">Back</a>
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Delete</strong> Mail</h4>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Are you sure want to delete this attachment?</p>
+                <p class="text-muted">All related data will be deleted</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed m-r-0" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger btn-embossed m-l-0 btn-delete-inbox" data-dismiss="modal">Delete Mail</button>
             </div>
         </div>
     </div>

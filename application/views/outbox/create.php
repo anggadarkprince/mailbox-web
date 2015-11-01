@@ -19,7 +19,7 @@
                 <!-- alert -->
                 <?php if(isset($operation)){ ?>
                     <div class="alert alert-<?=$operation?>" role="alert">
-                        <p class="text-center"><?php echo $message; ?></p>
+                        <p><?php echo $message; ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
@@ -27,7 +27,7 @@
                 <!-- alert -->
                 <?php if($this->session->flashdata('operation') != NULL){ ?>
                     <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
-                        <p class="text-center"><?=$this->session->flashdata('message'); ?></p>
+                        <p><?=$this->session->flashdata('message'); ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
