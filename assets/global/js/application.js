@@ -704,4 +704,97 @@ $(document).ready(function(){
             window.location.href = link_delete;
         }
     });
+
+    // original
+    checkOriginalLength();
+    $(".original-add").click(function(e){
+        e.preventDefault();
+        var row = (parseInt(checkOriginalLength())+1);
+        var tags = "" +
+            "<div class='row select-file'>" +
+                "<div class='col-md-2'>" +
+                    "<p class='m-t-5'>File "+row+"</p>" +
+                "</div>" +
+                "<div class='col-md-10'>" +
+                    "<div class='fileinput fileinput-new input-group' data-provides='fileinput'>" +
+                        "<div class='form-control form-white' data-trigger='fileinput'>" +
+                            "<i class='glyphicon glyphicon-file fileinput-exists'></i><span class='fileinput-filename'></span>" +
+                        "</div>" +
+                        "<span class='input-group-addon btn btn-default btn-file'>" +
+                            "<span class='fileinput-new'>Choose...</span>" +
+                            "<span class='fileinput-exists'>Change</span>" +
+                            "<input type='file' multiple size='20' name='attachment-original[]' id='original"+row+"'>" +
+                        "</span>" +
+                        "<a href='#' class='input-group-addon btn btn-default fileinput-exists' data-dismiss='fileinput'>Remove</a>" +
+                    "</div>" +
+                "</div>" +
+            "</div>";
+        $(".original-container").append(tags);
+        checkOriginalLength();
+    });
+    $(".original-delete").click(function(e){
+        e.preventDefault();
+        if(checkOriginalLength() > 0){
+            $(".original-container > .select-file").last().remove();
+        }
+        checkOriginalLength();
+    });
+
+    function checkOriginalLength(){
+        var length = $(".original-container .select-file").length;
+        if(length == 0){
+            $(".original-nofile").show();
+        }
+        else{
+            $(".original-nofile").hide();
+        }
+        return length;
+    }
+
+
+    // signature
+    checkSignatureLength();
+    $(".signature-add").click(function(e){
+        e.preventDefault();
+        var row = (parseInt(checkSignatureLength())+1);
+        var tags = "" +
+            "<div class='row select-file'>" +
+            "<div class='col-md-2'>" +
+            "<p class='m-t-5'>File "+row+"</p>" +
+            "</div>" +
+            "<div class='col-md-10'>" +
+            "<div class='fileinput fileinput-new input-group' data-provides='fileinput'>" +
+            "<div class='form-control form-white' data-trigger='fileinput'>" +
+            "<i class='glyphicon glyphicon-file fileinput-exists'></i><span class='fileinput-filename'></span>" +
+            "</div>" +
+            "<span class='input-group-addon btn btn-default btn-file'>" +
+            "<span class='fileinput-new'>Choose...</span>" +
+            "<span class='fileinput-exists'>Change</span>" +
+            "<input type='file' multiple size='20' name='attachment-signature[]' id='signature"+row+"'>" +
+            "</span>" +
+            "<a href='#' class='input-group-addon btn btn-default fileinput-exists' data-dismiss='fileinput'>Remove</a>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+        $(".signature-container").append(tags);
+        checkSignatureLength();
+    });
+    $(".signature-delete").click(function(e){
+        e.preventDefault();
+        if(checkSignatureLength() > 0){
+            $(".signature-container > .select-file").last().remove();
+        }
+        checkSignatureLength();
+    });
+
+    function checkSignatureLength(){
+        var length = $(".signature-container .select-file").length;
+        if(length == 0){
+            $(".signature-nofile").show();
+        }
+        else{
+            $(".signature-nofile").hide();
+        }
+        return length;
+    }
 });

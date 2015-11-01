@@ -42,13 +42,14 @@ class Inbox extends CI_Controller
             $this->form_validation->set_rules('no_mail', 'No Surat', 'trim|required');
             $this->form_validation->set_rules('subject', 'Perihal', 'trim|required|max_length[300]');
             $this->form_validation->set_rules('signature', 'Disposisi', 'min_length[0]');
-            $this->form_validation->set_rules('receiver', 'Tujuan', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('from', 'Dari', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('to', 'Tujuan', 'trim|required|max_length[300]');
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
-            $this->form_validation->set_rules('receive_date', 'Tanggal Terima', 'trim|required');
+            $this->form_validation->set_rules('received_date', 'Tanggal Terima', 'trim|required');
             $this->form_validation->set_rules('label', 'Label', 'trim|required');
 
             if ($this->form_validation->run() == FALSE)
-            {
+            {echo validation_errors();
                 $data = [
                     "operation" => "warning",
                     "message" => validation_errors()
@@ -61,10 +62,10 @@ class Inbox extends CI_Controller
                     'agenda_number' => $this->input->post('no_agenda'),
                     'mail_number' => $this->input->post('no_mail'),
                     'mail_date' => date_format(date_create($this->input->post('mail_date')), "Y-m-d"),
-                    'receive_date' => date_format(date_create($this->input->post('receive_date')), "Y-m-d"),
-                    'receiver' => $this->input->post('receiver'),
+                    'received_date' => date_format(date_create($this->input->post('receive_date')), "Y-m-d"),
+                    'from' => $this->input->post('from'),
+                    'to' => $this->input->post('to'),
                     'authorizing_signature' => $this->input->post('signature'),
-                    'attachment' => $_FILES["attachment"]["name"],
                     'label_id' => $this->input->post('label'),
                 ];
 
@@ -87,6 +88,7 @@ class Inbox extends CI_Controller
                         "message" => "Something is getting wrong",
                     ];
                 }
+
             }
         }
         $data['title'] = "Create In-mail";

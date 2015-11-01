@@ -19,7 +19,7 @@
                 <!-- alert -->
                 <?php if(isset($operation)){ ?>
                     <div class="alert alert-<?=$operation?>" role="alert">
-                        <p class="text-center"><?php echo $message; ?></p>
+                        <p><?php echo $message; ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
@@ -43,10 +43,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="no_mail">No Surat</label>
+                                <label class="col-sm-4 control-label" for="from">Dari</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('no_mail', '');?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
-                                    <i class="icon-envelope"></i>
+                                    <input type="text" value="<?=set_value('from', '');?>" name="from" id="from" class="form-control form-white" placeholder="Who sent this mail..." required maxlength="300">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="to">Tujuan</label>
+                                <div class="col-sm-8 prepend-icon">
+                                    <input type="text" value="<?=set_value('to', '');?>" name="to" id="to" class="form-control form-white" placeholder="Who receive this mail..." required maxlength="300">
+                                    <i class="icon-user"></i>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -59,16 +66,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="signature">Disposisi</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" name="signature" id="signature" class="form-control form-white" placeholder="Description and disposition shortly here..." required><?=set_value('signature', '');?></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="receiver">Tujuan</label>
-                                <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('receiver', '');?>" name="receiver" id="receiver" class="form-control form-white" placeholder="Who receive this mail..." required maxlength="300">
-                                    <i class="icon-user"></i>
+                                    <textarea rows="4" name="signature" id="signature" class="form-control form-white" placeholder="Description and disposition shortly here..."><?=set_value('signature', '');?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -81,39 +79,52 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="receive_date">Tanggal Diterima</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('receive_date', date("m/d/Y"));?>" name="receive_date" id="receive_date" class="date-picker form-control form-white" placeholder="Select a receive date..." required>
+                                    <input type="text" value="<?=set_value('receive_date', date("m/d/Y"));?>" name="received_date" id="received_date" class="date-picker form-control form-white" placeholder="Select a receive date..." required>
                                     <i class="icon-calendar"></i>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="attachment">File Surat</label>
-                                <div class="col-sm-8">
-                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                        <div class="form-control form-white" data-trigger="fileinput">
-                                            <i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span>
-                                        </div>
-                                        <span class="input-group-addon btn btn-default btn-file">
-                                            <span class="fileinput-new">Choose...</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="attachment" id="attachment">
-                                        </span>
-                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                    </div>
+                                <label class="col-sm-4 control-label" for="no_mail">No Surat</label>
+                                <div class="col-sm-8 prepend-icon">
+                                    <input type="text" value="<?=set_value('no_mail', '');?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
+                                    <i class="icon-envelope"></i>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="label">Label</label>
                                 <div class="col-sm-8">
                                     <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
-                                        <option value="" <?php echo set_select('label', '', TRUE); ?>>Select Label</option>
                                         <?php foreach($labels as $label): ?>
-                                            <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"]); ?>><?=$label['label']?></option>
+                                            <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"], ($label["id"]==2)?TRUE:FALSE); ?>><?=ucfirst(strtolower($label['label']))?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label">File Surat
+                                    <span class="pull-right"><a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
+                                </label>
+                                <div class="col-sm-12 m-t-10 original-nofile">No original file enclosed</div>
+                                <div class="col-sm-12 m-t-10 original-container">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label">Surat Disposisi
+                                    <span class="pull-right"><a href="#" class="signature-add">TAMBAH</a> | <a href="#" class="signature-delete">HAPUS</a></span>
+                                </label>
+                                <div class="col-sm-12 m-t-10 signature-nofile">No signature file enclosed</div>
+                                <div class="col-sm-12 m-t-10 signature-container">
+
+                                </div>
+                            </div>
+
                             <div class="form-group text-right">
                                 <div class="col-sm-12">
+                                    <hr>
                                     <button type="submit" class="btn btn-primary btn-embossed pull-right m-t-20">Create In-Mail</button>
                                     <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed pull-right m-t-20">Back</a>
                                 </div>

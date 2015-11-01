@@ -56,7 +56,7 @@
                 <i class="icon-lock"></i>
             </div>
 
-            <button type="submit" class="btn btn-lg btn-dark btn-rounded">Sign In</button>
+            <button type="submit" id="signin" class="btn btn-lg btn-dark btn-rounded">Sign In</button>
             <span class="forgot-password"><a id="password" href="#">Forgot password?</a></span>
             <div class="form-footer">
                 <div class="social-btn">
