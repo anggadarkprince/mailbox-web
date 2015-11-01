@@ -37,6 +37,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-4 control-label" for="receiver">Dari</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static"><?=$mail['from']?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="receiver">Tujuan</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static"><?=$mail['to']?></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-4 control-label" for="signature">Disposisi</label>
                                 <div class="col-sm-8">
                                     <p class="form-control-static"><?=$mail['authorizing_signature']?></p>
@@ -44,12 +56,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="receiver">Tujuan</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-static"><?=$mail['receiver']?></p>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="no_mail">Tanggal Surat</label>
                                 <div class="col-sm-8">
@@ -59,13 +65,25 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="receive_date">Tanggal Diterima</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><?=date_format(date_create($mail['receive_date']), "d F Y")?></p>
+                                    <p class="form-control-static"><?=date_format(date_create($mail['received_date']), "d F Y")?></p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="attachment">File Surat</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><a href="<?=base_url()?>assets/global/file/<?=$mail['attachment']?>">DOWNLOAD</a></p>
+                                    <?=count($attachment_original) == 0 ? "<p class='m-t-10'>No File Available</p>" : "" ?>
+                                    <?php foreach($attachment_original as $attachment): ?>
+                                        <p class="form-control-static"><a href="<?=base_url()?>assets/global/file/<?=$attachment['resource']?>"><?=$attachment['resource']?></a></p>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="attachment">File Disposisi</label>
+                                <div class="col-sm-8">
+                                    <?=count($attachment_signature) == 0 ? "<p class='m-t-10'>No File Available</p>" : "" ?>
+                                    <?php foreach($attachment_signature as $attachment): ?>
+                                        <p class="form-control-static"><a href="<?=base_url()?>assets/global/file/<?=$attachment['resource']?>"><?=$attachment['resource']?></a></p>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                             <div class="form-group">

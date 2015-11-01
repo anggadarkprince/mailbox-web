@@ -118,6 +118,12 @@ class Inbox_model extends CI_Model
         }
     }
 
+    public function read_attachment($mail, $type)
+    {
+        $result = $this->db->get_where('inbox_attachment', ['inbox_id' => $mail, 'type' => $type]);
+        return $result->result_array();
+    }
+
     public function update($mail, $id)
     {
         $status = array();
@@ -155,8 +161,21 @@ class Inbox_model extends CI_Model
 
     public function delete($id)
     {
+        $attachment = $this->db->get_where('inbox_attachment', ['inbox_id' => $id])->result_array();
+
         $condition = array($this->pk => $id);
-        return $this->db->delete($this->table, $condition);
+        $delete = $this->db->delete($this->table, $condition);
+        if($delete){
+            foreach($attachment as $data):
+                echo $data["resource"];
+                $upload = "./assets/global/file/".$data["resource"];
+                if(file_exists($upload)){
+                    unlink($upload);
+                }
+            endforeach;
+        }
+
+        return $delete;
     }
 
 }

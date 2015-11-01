@@ -177,7 +177,9 @@ class Inbox extends CI_Controller
         $data = [
             'title' => "Detail In-mail",
             'page' => "inbox/show",
-            'mail' => $this->inbox_model->read($id)
+            'mail' => $this->inbox_model->read($id),
+            'attachment_original' => $this->inbox_model->read_attachment($id, 'ORIGINAL'),
+            'attachment_signature' => $this->inbox_model->read_attachment($id, 'SIGNATURE')
         ];
         $this->load->view('templates/template', $data);
     }
