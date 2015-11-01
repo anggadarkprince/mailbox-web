@@ -104,29 +104,25 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">File Surat
-                                    <span class="pull-right"><a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
+                                    <span class="pull-right"> &nbsp; <a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
                                 </label>
                                 <div class="col-sm-12 m-t-10 original-nofile">No original file enclosed</div>
-                                <div class="col-sm-12 m-t-10 original-container">
-
-                                </div>
+                                <div class="col-sm-12 m-t-10 original-container"></div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">Surat Disposisi
-                                    <span class="pull-right"><a href="#" class="signature-add">TAMBAH</a> | <a href="#" class="signature-delete">HAPUS</a></span>
+                                    <span class="pull-right"> &nbsp; <a href="#" class="signature-add">TAMBAH</a> | <a href="#" class="signature-delete">HAPUS</a></span>
                                 </label>
                                 <div class="col-sm-12 m-t-10 signature-nofile">No signature file enclosed</div>
-                                <div class="col-sm-12 m-t-10 signature-container">
-
-                                </div>
+                                <div class="col-sm-12 m-t-10 signature-container"></div>
                             </div>
 
                             <div class="form-group text-right">
                                 <div class="col-sm-12">
                                     <hr>
-                                    <button type="submit" class="btn btn-primary btn-embossed pull-right m-t-20">Create In-Mail</button>
-                                    <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed pull-right m-t-20">Back</a>
+                                    <button type="submit" class="btn btn-primary btn-embossed pull-right">Create In-Mail</button>
+                                    <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed pull-right">Back</a>
                                 </div>
                             </div>
                         </div>

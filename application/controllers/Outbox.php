@@ -38,6 +38,7 @@ class Outbox extends CI_Controller
     {
         if($this->input->server('REQUEST_METHOD') == "POST")
         {
+            $this->form_validation->set_rules('no_agenda', 'No Agenda', 'trim|required');
             $this->form_validation->set_rules('no_mail', 'No Surat', 'trim|required');
             $this->form_validation->set_rules('subject', 'Perihal', 'trim|required|max_length[300]');
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
@@ -57,12 +58,12 @@ class Outbox extends CI_Controller
             {
                 $data = [
                     'subject' => $this->input->post('subject'),
+                    'agenda_number' => $this->input->post('no_agenda'),
                     'mail_number' => $this->input->post('no_mail'),
                     'mail_date' => date_format(date_create($this->input->post('mail_date')), "Y-m-d"),
                     'from' => $this->input->post('from'),
                     'to' => $this->input->post('to'),
                     'description' => $this->input->post('description'),
-                    'attachment' => $_FILES["attachment"]["name"],
                     'label_id' => $this->input->post('label'),
                     'user_id' => $this->session->userdata(User_model::$SESSION_ID),
                 ];

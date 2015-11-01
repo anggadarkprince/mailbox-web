@@ -86,7 +86,7 @@ class Inbox_model extends CI_Model
             }
             $signature = $this->upload_batch_attachment('attachment-signature', $this->db->insert_id(), 'SIGNATURE');
             if(!$signature['upload'] || !$signature['query']){
-                return $original;
+                return $signature;
             }
         }
 
@@ -137,7 +137,7 @@ class Inbox_model extends CI_Model
             }
             $signature = $this->upload_batch_attachment('attachment-signature', $id, 'SIGNATURE');
             if(!$signature['upload'] || !$signature['query']){
-                return $original;
+                return $signature;
             }
         }
 

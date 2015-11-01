@@ -104,7 +104,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">File Surat
-                                    <span class="pull-right"><a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
+                                    <span class="pull-right"> &nbsp; <a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
                                 </label>
                                 <div class="col-sm-12">
                                     <p>Last Uploaded :</p>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">File Disposisi
-                                    <span class="pull-right"><a href="#" class="signature-add">TAMBAH</a> | <a href="#" class="signature-delete">HAPUS</a></span>
+                                    <span class="pull-right"> &nbsp; <a href="#" class="signature-add">TAMBAH</a> | <a href="#" class="signature-delete">HAPUS</a></span>
                                 </label>
                                 <div class="col-sm-12">
                                     <p>Last Uploaded :</p>
@@ -144,8 +144,9 @@
                             </div>
                             <div class="form-group text-right">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-primary btn-embossed pull-right m-t-20">Update In-Mail</button>
-                                    <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed pull-right m-t-20">Back</a>
+                                    <hr>
+                                    <button type="submit" class="btn btn-primary btn-embossed pull-right">Update In-Mail</button>
+                                    <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed pull-right">Back</a>
                                 </div>
                             </div>
                         </div>
