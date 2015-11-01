@@ -119,7 +119,7 @@ if(isset($title)){
                 <ul class="children collapse">
                     <li class="<?=$today_active?>"><a href="<?=site_url()?>report/today.html"> Today</a></li>
                     <li class="<?=$week_active?>"><a href="<?=site_url()?>report/week.html"> Last Week</a></li>
-                    <li class="<?=$all_active?>"><a href="<?=site_url()?>report.html"> All</a></li>
+                    <li class="<?=$all_active?>"><a href="<?=site_url()?>report.html"> Statistic</a></li>
                 </ul>
             </li>
         </ul>

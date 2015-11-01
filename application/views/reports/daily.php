@@ -18,7 +18,21 @@
 
             <div>
                 <div class="border-bottom">
-                    <h3><i class="fa fa-envelope"></i> Mail Number <strong><?=$mail['mail_number']?></strong> <span class="label label-danger pull-right">Important</span></h3>
+                    <h3><i class="fa fa-envelope"></i> Mail Number <strong><?=$mail['mail_number']?></strong>
+                        <?php
+                        $label = "success";
+                        if($mail["label"] == "IMPORTANT"){
+                            $label = "danger";
+                        }
+                        else if($mail["label"] == "SOON"){
+                            $label = "warning";
+                        }
+                        else if($mail["label"] == "GENERAL"){
+                            $label = "primary";
+                        }
+                        ?>
+                        <span class="pull-right label label-<?=$label?>"><?=$mail['label']?></span>
+                    </h3>
                 </div>
                 <div class="report">
                     <form class="form-horizontal">
@@ -100,7 +114,21 @@
 
             <div>
                 <div class="border-bottom">
-                    <h3><i class="fa fa-envelope"></i> Mail Number <strong><?=$mail['mail_number']?></strong> <span class="label label-danger pull-right">Important</span></h3>
+                    <h3><i class="fa fa-envelope"></i> Mail Number <strong><?=$mail['mail_number']?></strong>
+                        <?php
+                        $label = "success";
+                        if($mail["label"] == "IMPORTANT"){
+                            $label = "danger";
+                        }
+                        else if($mail["label"] == "SOON"){
+                            $label = "warning";
+                        }
+                        else if($mail["label"] == "GENERAL"){
+                            $label = "primary";
+                        }
+                        ?>
+                        <span class="pull-right label label-<?=$label?>"><?=$mail['label']?></span>
+                    </h3>
                 </div>
                 <div class="report">
                     <form class="form-horizontal">
