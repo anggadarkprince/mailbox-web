@@ -43,7 +43,7 @@ class Inbox extends CI_Controller
             $this->form_validation->set_rules('subject', 'Perihal', 'trim|required|max_length[300]');
             $this->form_validation->set_rules('signature', 'Disposisi', 'min_length[0]');
             $this->form_validation->set_rules('from', 'Dari', 'trim|required|max_length[300]');
-            $this->form_validation->set_rules('to', 'Tujuan', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('to', 'Tujuan', 'max_length[300]');
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
             $this->form_validation->set_rules('received_date', 'Tanggal Terima', 'trim|required');
             $this->form_validation->set_rules('label', 'Label', 'trim|required');
@@ -62,7 +62,7 @@ class Inbox extends CI_Controller
                     'agenda_number' => $this->input->post('no_agenda'),
                     'mail_number' => $this->input->post('no_mail'),
                     'mail_date' => date_format(date_create($this->input->post('mail_date')), "Y-m-d"),
-                    'received_date' => date_format(date_create($this->input->post('receive_date')), "Y-m-d"),
+                    'received_date' => date_format(date_create($this->input->post('received_date')), "Y-m-d"),
                     'from' => $this->input->post('from'),
                     'to' => $this->input->post('to'),
                     'authorizing_signature' => $this->input->post('signature'),
@@ -105,6 +105,8 @@ class Inbox extends CI_Controller
             'page' => "inbox/edit",
             'labels' => $this->label_model->read(),
             'mail' => $this->inbox_model->read($id),
+            'attachment_original' => $this->inbox_model->read_attachment($id, 'ORIGINAL'),
+            'attachment_signature' => $this->inbox_model->read_attachment($id, 'SIGNATURE')
         ];
         $this->load->view('templates/template', $data);
     }
@@ -118,9 +120,10 @@ class Inbox extends CI_Controller
             $this->form_validation->set_rules('no_mail', 'No Surat', 'trim|required');
             $this->form_validation->set_rules('subject', 'Perihal', 'trim|required|max_length[300]');
             $this->form_validation->set_rules('signature', 'Disposisi', 'min_length[0]');
-            $this->form_validation->set_rules('receiver', 'Tujuan', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('from', 'Dari', 'trim|required|max_length[300]');
+            $this->form_validation->set_rules('to', 'Tujuan', 'max_length[300]');
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
-            $this->form_validation->set_rules('receive_date', 'Tanggal Terima', 'trim|required');
+            $this->form_validation->set_rules('received_date', 'Tanggal Terima', 'trim|required');
             $this->form_validation->set_rules('label', 'Label', 'trim|required');
 
             if ($this->form_validation->run() == FALSE)
@@ -137,10 +140,10 @@ class Inbox extends CI_Controller
                     'agenda_number' => $this->input->post('no_agenda'),
                     'mail_number' => $this->input->post('no_mail'),
                     'mail_date' => date_format(date_create($this->input->post('mail_date')), "Y-m-d"),
-                    'receive_date' => date_format(date_create($this->input->post('receive_date')), "Y-m-d"),
-                    'receiver' => $this->input->post('receiver'),
+                    'received_date' => date_format(date_create($this->input->post('received_date')), "Y-m-d"),
+                    'from' => $this->input->post('from'),
+                    'to' => $this->input->post('to'),
                     'authorizing_signature' => $this->input->post('signature'),
-                    'attachment' => $_FILES["attachment"]["name"],
                     'label_id' => $this->input->post('label'),
                 ];
 
@@ -169,6 +172,8 @@ class Inbox extends CI_Controller
         $data['page'] = "inbox/edit";
         $data['labels'] = $this->label_model->read();
         $data['mail'] = $this->inbox_model->read($id);
+        $data['attachment_original'] = $this->inbox_model->read_attachment($id, 'ORIGINAL');
+        $data['attachment_signature'] = $this->inbox_model->read_attachment($id, 'SIGNATURE');
         $this->load->view('templates/template', $data);
     }
 
@@ -201,5 +206,19 @@ class Inbox extends CI_Controller
         else{
             redirect("inbox");
         }
+    }
+
+    public function delete_attachment($id, $mail)
+    {
+        $result = $this->inbox_model->delete_attachment($id);
+        if($result){
+            $this->session->set_flashdata("operation", "warning");
+            $this->session->set_flashdata("message", "<strong>Attachment</strong> successfully deleted");
+        }
+        else{
+            $this->session->set_flashdata("operation", "danger");
+            $this->session->set_flashdata("message", "Something is getting wrong");
+        }
+        redirect("inbox/edit/".$mail);
     }
 }

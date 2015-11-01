@@ -18,7 +18,7 @@
                 <!-- alert -->
                 <?php if(isset($operation)){ ?>
                     <div class="alert alert-<?=$operation?>" role="alert">
-                        <p class="text-center"><?php echo $message; ?></p>
+                        <p><?php echo $message; ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
@@ -26,7 +26,7 @@
                 <!-- alert -->
                 <?php if($this->session->flashdata('operation') != NULL){ ?>
                     <div class="alert alert-<?=$this->session->flashdata('operation')?>" role="alert">
-                        <p class="text-center"><?=$this->session->flashdata('message'); ?></p>
+                        <p><?=$this->session->flashdata('message'); ?></p>
                     </div>
                 <?php } ?>
                 <!-- end of alert -->
@@ -43,10 +43,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="no_mail">No Surat</label>
+                                <label class="col-sm-4 control-label" for="to">Dari</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('no_mail', $mail['mail_number']);?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
-                                    <i class="icon-envelope"></i>
+                                    <input type="text" value="<?=set_value('from', $mail['from']);?>" name="from" id="from" class="form-control form-white" placeholder="Who sent this mail..." required maxlength="300">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="to">Tujuan</label>
+                                <div class="col-sm-8 prepend-icon">
+                                    <input type="text" value="<?=set_value('to', $mail['to']);?>" name="to" id="to" class="form-control form-white" placeholder="Who receive this mail..." maxlength="300">
+                                    <i class="icon-user"></i>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -59,16 +66,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="signature">Disposisi</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" name="signature" id="signature" class="form-control form-white" placeholder="Description and disposition shortly here..." required><?=set_value('signature', $mail['authorizing_signature']);?></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label" for="receiver">Tujuan</label>
-                                <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('receiver', $mail['receiver']);?>" name="receiver" id="receiver" class="form-control form-white" placeholder="Who receive this mail..." required maxlength="300">
-                                    <i class="icon-user"></i>
+                                    <textarea rows="4" name="signature" id="signature" class="form-control form-white" placeholder="Description and disposition shortly here..."><?=set_value('signature', $mail['authorizing_signature']);?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -81,37 +79,68 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="receive_date">Tanggal Diterima</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('receive_date', date_format(date_create($mail['receive_date']), "m/d/Y"));?>" name="receive_date" id="receive_date" class="date-picker form-control form-white" placeholder="Select a receive date..." required>
+                                    <input type="text" value="<?=set_value('received_date', date_format(date_create($mail['received_date']), "m/d/Y"));?>" name="received_date" id="receive_date" class="date-picker form-control form-white" placeholder="Select a receive date..." required>
                                     <i class="icon-calendar"></i>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="attachment">File Surat</label>
-                                <div class="col-sm-8">
-                                    <p>Last Uploaded : <?=$mail["attachment"]?></p>
-                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                        <div class="form-control form-white" data-trigger="fileinput">
-                                            <i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span>
-                                        </div>
-                                        <span class="input-group-addon btn btn-default btn-file">
-                                            <span class="fileinput-new">Choose...</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="attachment" id="attachment">
-                                        </span>
-                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                    </div>
+                                <label class="col-sm-4 control-label" for="no_mail">No Surat</label>
+                                <div class="col-sm-8 prepend-icon">
+                                    <input type="text" value="<?=set_value('no_mail', $mail['mail_number']);?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
+                                    <i class="icon-envelope"></i>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="label">Label</label>
                                 <div class="col-sm-8">
                                     <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
-                                        <option value="" <?php echo set_select('label', ''); ?>>Select Label</option>
                                         <?php foreach($labels as $label): ?>
-                                            <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"], ($label['id'] == $mail['label_id']) ? true : false); ?>><?=$label['label']?></option>
+                                            <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"], ($label['id'] == $mail['label_id']) ? true : false); ?>><?=ucfirst(strtolower($label['label']))?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label">File Surat
+                                    <span class="pull-right"><a href="#" class="original-add">TAMBAH</a> | <a href="#" class="original-delete">HAPUS</a></span>
+                                </label>
+                                <div class="col-sm-12">
+                                    <p>Last Uploaded :</p>
+                                    <ol class="m-l-20 original-uploaded">
+                                    <?php foreach($attachment_original as $attachment): ?>
+                                        <li>
+                                            <p class="form-control-static">
+                                                <a href="<?=base_url()?>assets/global/file/<?=$attachment['resource']?>"><?=$attachment['resource']?></a>
+                                                <a href="#modal-delete" data-link="<?=site_url()?>inbox/delete_attachment/<?=$attachment['id']?>/<?=$mail["id"]?>.html" data-toggle="modal" class="pull-right btn-delete">HAPUS</a>
+                                            </p>
+                                        </li>
+                                    <?php endforeach; ?>
+                                    </ol>
+                                </div>
+                                <div class="col-sm-12 m-t-10 original-nofile">No original file enclosed</div>
+                                <div class="col-sm-12 m-t-10 original-container"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label">File Disposisi
+                                    <span class="pull-right"><a href="#" class="signature-add">TAMBAH</a> | <a href="#" class="signature-delete">HAPUS</a></span>
+                                </label>
+                                <div class="col-sm-12">
+                                    <p>Last Uploaded :</p>
+                                    <ol class="m-l-20 signature-uploaded">
+                                        <?php foreach($attachment_signature as $signature): ?>
+                                            <li>
+                                                <p class="form-control-static">
+                                                    <a href="<?=base_url()?>assets/global/file/<?=$signature['resource']?>"><?=$signature['resource']?></a>
+                                                    <a href="#modal-delete" data-link="<?=site_url()?>inbox/delete_attachment/<?=$signature['id']?>/<?=$mail["id"]?>.html" data-toggle="modal" class="pull-right btn-delete">HAPUS</a>
+                                                </p>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ol>
+                                </div>
+                                <div class="col-sm-12 m-t-10 signature-nofile">No signature file enclosed</div>
+                                <div class="col-sm-12 m-t-10 signature-container"></div>
                             </div>
                             <div class="form-group text-right">
                                 <div class="col-sm-12">
@@ -122,6 +151,25 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>Delete</strong> Mail</h4>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Are you sure want to delete this attachment?</p>
+                <p class="text-muted">All related data will be deleted</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed m-r-0" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger btn-embossed m-l-0 btn-delete-inbox" data-dismiss="modal">Delete Mail</button>
             </div>
         </div>
     </div>

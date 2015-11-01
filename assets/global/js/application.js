@@ -741,7 +741,7 @@ $(document).ready(function(){
     });
 
     function checkOriginalLength(){
-        var length = $(".original-container .select-file").length;
+        var length = parseInt($(".original-container .select-file").length) + parseInt($(".original-uploaded li").length);
         if(length == 0){
             $(".original-nofile").show();
         }
@@ -788,7 +788,7 @@ $(document).ready(function(){
     });
 
     function checkSignatureLength(){
-        var length = $(".signature-container .select-file").length;
+        var length = parseInt($(".signature-container .select-file").length) + parseInt($(".signature-uploaded li").length);
         if(length == 0){
             $(".signature-nofile").show();
         }

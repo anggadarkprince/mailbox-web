@@ -112,7 +112,6 @@
                 <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed"><i class="fa fa-chevron-left"></i> Back</a>
                 <a href="#modal-delete" data-link="<?=site_url()?>inbox/delete/<?=$mail['id']?>.html" data-toggle="modal"  class="btn btn-danger btn-embossed pull-right btn-delete"><i class="fa fa-trash"></i> Delete</a>
                 <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-pencil"></i> Edit</a>
-                <a href="<?=site_url()?>inbox/print/<?=$mail['id']?>.html" class="btn btn-primary btn-embossed pull-right"><i class="fa fa-print"></i> Print</a>
             </div>
         </div>
     </div>

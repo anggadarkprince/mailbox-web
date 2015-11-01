@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="to">Tujuan</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('to', '');?>" name="to" id="to" class="form-control form-white" placeholder="Who receive this mail..." required maxlength="300">
+                                    <input type="text" value="<?=set_value('to', '');?>" name="to" id="to" class="form-control form-white" placeholder="Who receive this mail..." maxlength="300">
                                     <i class="icon-user"></i>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="receive_date">Tanggal Diterima</label>
                                 <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('receive_date', date("m/d/Y"));?>" name="received_date" id="received_date" class="date-picker form-control form-white" placeholder="Select a receive date..." required>
+                                    <input type="text" value="<?=set_value('received_date', date("m/d/Y"));?>" name="received_date" id="received_date" class="date-picker form-control form-white" placeholder="Select a receive date..." required>
                                     <i class="icon-calendar"></i>
                                 </div>
                             </div>

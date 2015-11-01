@@ -128,34 +128,23 @@ class Inbox_model extends CI_Model
     {
         $status = array();
 
-        if ($mail["attachment"] == null) {
-            unset($mail["attachment"]);
-        } else {
-            $config = array(
-                'allowed_types' => '*',
-                'upload_path' => "./assets/global/file",
-                'max_size' => 10000,
-                'file_name' => date("Y-m-y")."_".$mail["attachment"],
-                'overwrite' => false
-            );
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('attachment'))
-            {
-                $status["upload"] = false;
-                $status["query"] = false;
-                $status["message"] = $this->upload->display_errors();
-                return $status;
+        $this->db->where($this->pk, $id);
+        $inbox = $this->db->update($this->table, $mail);
+        if($inbox){
+            $original = $this->upload_batch_attachment('attachment-original', $id, 'ORIGINAL');
+            if(!$original['upload'] || !$original['query']){
+                return $original;
             }
-            else
-            {
-                $mail["attachment"] = $this->upload->data()["file_name"];
-                $status["upload"] = true;
-                $status["message"] = "Attachment successfully uploaded";
+            $signature = $this->upload_batch_attachment('attachment-signature', $id, 'SIGNATURE');
+            if(!$signature['upload'] || !$signature['query']){
+                return $original;
             }
         }
 
-        $this->db->where($this->pk, $id);
-        $status["query"] = $this->db->update($this->table, $mail);
+        $status["query"] = $inbox;
+        $status["upload"] = true;
+        $status["message"] = "Attachment successfully uploaded";
+
         return $status;
     }
 
@@ -167,7 +156,6 @@ class Inbox_model extends CI_Model
         $delete = $this->db->delete($this->table, $condition);
         if($delete){
             foreach($attachment as $data):
-                echo $data["resource"];
                 $upload = "./assets/global/file/".$data["resource"];
                 if(file_exists($upload)){
                     unlink($upload);
@@ -175,6 +163,21 @@ class Inbox_model extends CI_Model
             endforeach;
         }
 
+        return $delete;
+    }
+
+    public function delete_attachment($id)
+    {
+        $attachment = $this->db->get_where('inbox_attachment', [$this->pk => $id])->row_array();
+
+        $condition = array($this->pk => $id);
+        $delete = $this->db->delete("inbox_attachment", $condition);
+        if($delete){
+            $upload = "./assets/global/file/".$attachment["resource"];
+            if(file_exists($upload)){
+                unlink($upload);
+            }
+        }
         return $delete;
     }
 
