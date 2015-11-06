@@ -14,6 +14,7 @@
             <div class="panel-header panel-controls">
                 <h3><i class="fa fa-envelope"></i> Create <strong>Form</strong></h3>
             </div>
+            <form action="<?=site_url()?>inbox/create.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
             <div class="panel-content">
 
                 <!-- alert -->
@@ -32,7 +33,6 @@
                 <?php } ?>
                 <!-- end of alert -->
 
-                <form action="<?=site_url()?>inbox/create.html" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -50,13 +50,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="to">Tujuan</label>
-                                <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('to', '');?>" name="to" id="to" class="form-control form-white" placeholder="Who receive this mail..." maxlength="300">
-                                    <i class="icon-user"></i>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-sm-4 control-label" for="subject">Perihal</label>
                                 <div class="col-sm-8 prepend-icon">
                                     <input type="text" value="<?=set_value('subject', '');?>" name="subject" id="subject" class="form-control form-white" placeholder="Enter mail subject here..." required maxlength="300">
@@ -64,9 +57,29 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="signature">Disposisi</label>
+                                <label class="col-sm-4 control-label" for="to">Diteruskan</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="4" name="signature" id="signature" class="form-control form-white" placeholder="Description and disposition shortly here..."><?=set_value('signature', '');?></textarea>
+                                    <?php $no = 1; ?>
+                                    <?php foreach($divisions as $division): ?>
+                                        <div>
+                                            <label style="font-weight: normal" for="division<?= $no ?>" class="m-t-10">
+                                                <input type="checkbox" name="divisions[]" id="division<?= $no ?>" value="<?=$division['id']?>" <?php echo set_checkbox('divisions', $division['id']); ?> data-checkbox="icheckbox_square-blue"/>
+                                                <?=$division['division']?>
+                                            </label>
+                                        </div>
+                                    <?php $no++; endforeach; ?>
+                                    <div class="m-t-10">
+                                        <input type="text" name="to" id="to" class="form-control form-white" placeholder="Who receive this mail..." maxlength="300">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="no_mail">No Surat</label>
+                                <div class="col-sm-8 prepend-icon">
+                                    <input type="text" value="<?=set_value('no_mail', '');?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
+                                    <i class="icon-envelope"></i>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -83,17 +96,23 @@
                                     <i class="icon-calendar"></i>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="no_mail">No Surat</label>
-                                <div class="col-sm-8 prepend-icon">
-                                    <input type="text" value="<?=set_value('no_mail', '');?>" name="no_mail" id="no_mail" class="form-control form-white" placeholder="Enter mail number here..." required maxlength="100">
-                                    <i class="icon-envelope"></i>
+                                <label class="col-sm-4 control-label" for="signature">Disposisi</label>
+                                <div class="col-sm-8">
+                                    <?php $no = 1; ?>
+                                    <?php foreach($signatures as $signature): ?>
+                                        <div>
+                                            <label  style="font-weight: normal" for="signature<?= $no ?>" class="m-t-10">
+                                                <input type="checkbox" name="signatures[]" id="signature<?= $no ?>"  value="<?=$signature['id']?>" <?php echo set_checkbox('signatures', $signature['id']); ?> data-checkbox="icheckbox_square-blue"/>
+                                                <?=$signature['signature']?>
+                                            </label>
+                                        </div>
+                                    <?php $no++; endforeach; ?>
+                                    <textarea rows="3" name="signature" id="signature" class="form-control form-white m-t-10" placeholder="Description and disposition shortly here..."><?=set_value('signature', '');?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="label">Label</label>
+                                <label class="col-sm-4 control-label" for="label">Sifat</label>
                                 <div class="col-sm-8">
                                     <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
                                         <?php foreach($labels as $label): ?>
@@ -118,17 +137,15 @@
                                 <div class="col-sm-12 m-t-10 signature-container"></div>
                             </div>
 
-                            <div class="form-group text-right">
-                                <div class="col-sm-12">
-                                    <hr>
-                                    <button type="submit" class="btn btn-primary btn-embossed pull-right">Create In-Mail</button>
-                                    <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed pull-right">Back</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </form>
+
             </div>
+            <div class="panel-footer">
+                <a href="<?=site_url()?>inbox.html" class="btn btn-default btn-embossed"><i class="fa fa-chevron-left"></i> Back</a>
+                <button type="submit" class="btn btn-primary btn-embossed pull-right">Create In-Mail</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

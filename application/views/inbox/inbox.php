@@ -27,7 +27,8 @@
                         <th>No</th>
                         <th>Surat</th>
                         <th>Perihal</th>
-                        <th>Tanggal</th>
+                        <th>Tgl Terima</th>
+                        <th>Tgl Surat</th>
                         <th>Dari</th>
                         <th>Kepada</th>
                         <th>Detail</th>
@@ -42,6 +43,7 @@
                             <td><?=$no++?></td>
                             <td><?=$mail['mail_number']?></td>
                             <td><?=word_limiter($mail['subject'], 4)?></td>
+                            <td><?=date_format(date_create($mail['received_date']), "d M Y")?></td>
                             <td><?=date_format(date_create($mail['mail_date']), "d M Y")?></td>
                             <td><?=$mail['from']?></td>
                             <td><?=$mail['to']?></td>

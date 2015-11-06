@@ -74,23 +74,41 @@ class Inbox_model extends CI_Model
         return $result["no"];
     }
 
-    public function create($mail)
+    public function create($mail, $division, $signature)
     {
         $status = array();
 
+        $this->db->trans_start();
+
+        // inbox
         $inbox = $this->db->insert($this->table, $mail);
-        if($inbox){
-            $original = $this->upload_batch_attachment('attachment-original', $this->db->insert_id(), 'ORIGINAL');
+        $lastId = $this->db->insert_id();
+        if($inbox && (isset($_FILES['attachment-original']) || isset($_FILES['attachment-signature']))){
+            // original attachment
+            $original = $this->upload_batch_attachment('attachment-original', $lastId, 'ORIGINAL');
             if(!$original['upload'] || !$original['query']){
                 return $original;
             }
-            $signature = $this->upload_batch_attachment('attachment-signature', $this->db->insert_id(), 'SIGNATURE');
+            // signature attachment
+            $signature = $this->upload_batch_attachment('attachment-signature', $lastId, 'SIGNATURE');
             if(!$signature['upload'] || !$signature['query']){
                 return $signature;
             }
         }
 
-        $status["query"] = $inbox;
+        // division
+        for($i = 0; $i < count($division); $i++){
+            $this->db->insert("inbox_division", array("inbox_id" => $lastId, "division_id" => $division[$i]));
+        }
+
+        // signature
+        for($i = 0; $i < count($signature); $i++){
+            $this->db->insert("inbox_signature",  array("inbox_id" => $lastId, "signature_id" => $signature[$i]));
+        }
+
+        $this->db->trans_complete();
+
+        $status["query"] = $this->db->trans_status();
         $status["upload"] = true;
         $status["message"] = "Attachment successfully uploaded";
 
@@ -122,6 +140,18 @@ class Inbox_model extends CI_Model
     public function read_attachment($mail, $type)
     {
         $result = $this->db->get_where('inbox_attachment', ['inbox_id' => $mail, 'type' => $type]);
+        return $result->result_array();
+    }
+
+    public function read_division()
+    {
+        $result = $this->db->get('division');
+        return $result->result_array();
+    }
+
+    public function read_signature()
+    {
+        $result = $this->db->get('signature');
         return $result->result_array();
     }
 

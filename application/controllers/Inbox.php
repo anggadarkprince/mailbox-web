@@ -47,9 +47,11 @@ class Inbox extends CI_Controller
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
             $this->form_validation->set_rules('received_date', 'Tanggal Terima', 'trim|required');
             $this->form_validation->set_rules('label', 'Label', 'trim|required');
+            $this->form_validation->set_rules('divisions[]', 'Terusan', 'min_length[0]');
+            $this->form_validation->set_rules('signatures[]', 'List Disposisi', 'min_length[0]');
 
             if ($this->form_validation->run() == FALSE)
-            {echo validation_errors();
+            {
                 $data = [
                     "operation" => "warning",
                     "message" => validation_errors()
@@ -69,7 +71,10 @@ class Inbox extends CI_Controller
                     'label_id' => $this->input->post('label'),
                 ];
 
-                $result = $this->inbox_model->create($data);
+                $division = $this->input->post('divisions');
+                $signature = $this->input->post('signatures');
+
+                $result = $this->inbox_model->create($data, $division, $signature);
                 if(isset($result["upload"]) && !$result["upload"]){
                     $data = [
                         "operation" => "warning",
@@ -91,9 +96,12 @@ class Inbox extends CI_Controller
 
             }
         }
+
         $data['title'] = "Create In-mail";
         $data['page'] = "inbox/create";
         $data['agenda'] = $this->inbox_model->next_agenda();
+        $data['divisions'] = $this->inbox_model->read_division();
+        $data['signatures'] = $this->inbox_model->read_signature();
         $data['labels'] = $this->label_model->read();
         $this->load->view('templates/template', $data);
     }

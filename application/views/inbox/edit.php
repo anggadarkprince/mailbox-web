@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="label">Label</label>
+                                <label class="col-sm-4 control-label" for="label">Sifat</label>
                                 <div class="col-sm-8">
                                     <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
                                         <?php foreach($labels as $label): ?>
