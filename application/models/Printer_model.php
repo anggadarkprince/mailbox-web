@@ -30,7 +30,7 @@ class Printer_model extends CI_Model
         $this->pdf->SetFont('Arial', '', 8);
         $this->pdf->SetTextColor(100, 100, 100);
         $this->pdf->Cell(0, 5, 'JL ABDUL MUIS NO 7 JAKARTA PUSAT 10110, TLP 021 3500334, FAX 021 3864607', 0, 1, 'C');
-        $this->pdf->Cell(0, 5, 'JL KALIBATA NO 1 JAKARTA SELATAN 12740, TLP 021 7989924, FAX 021 7974488', 0, 1, 'C');
+        $this->pdf->Cell(0, 5, 'JL TMP KALIBATA NO 17 JAKARTA SELATAN 12740, TLP 021 7989924, FAX 021 7974488', 0, 1, 'C');
 
         $this->pdf->Ln(4);
 
@@ -167,6 +167,18 @@ class Printer_model extends CI_Model
         endforeach;
 
 
+        if(trim($mail['authorizing_signature']) == ''){
+            $this->pdf->Rect(24, $this->pdf->GetY() + 2, 4, 4);
+            $this->pdf->SetXY(30, $this->pdf->GetY() + 2);
+            $this->pdf->Cell(50, 4, ". . . . . . . . . . . . . . . . .", 0, 1, 'L');
+        }
+        else{
+            $this->pdf->Rect(24, $this->pdf->GetY() + 2, 4, 4, 'F');
+            $this->pdf->SetXY(30, $this->pdf->GetY() + 2);
+            $this->pdf->Cell(50, 4, $mail['to'], 0, 1, 'L');
+        }
+
+
 
 
         // signature
@@ -199,10 +211,22 @@ class Printer_model extends CI_Model
             $this->pdf->Cell(50, 4, $signature['signature'], 0, 1, 'L');
         endforeach;
 
-        $this->pdf->Rect($x, $signature_y, 170, $signature_height + 10);
+
+        if(trim($mail['authorizing_signature']) == ''){
+            $this->pdf->Rect(114.3, $this->pdf->GetY() + 2, 4, 4);
+            $this->pdf->SetXY(120.3, $this->pdf->GetY() + 2);
+            $this->pdf->Cell(50, 4, ". . . . . . . . . . . . . . . . .", 0, 1, 'L');
+        }
+        else{
+            $this->pdf->Rect(114.3, $this->pdf->GetY() + 2, 4, 4, 'F');
+            $this->pdf->SetXY(120.3, $this->pdf->GetY() + 2);
+            $this->pdf->Cell(50, 4, $mail['authorizing_signature'], 0, 1, 'L');
+        }
+
+        $this->pdf->Rect($x, $signature_y, 170, $signature_height + 15);
 
 
-        $this->pdf->setY($signature_y + $signature_height + 13);
+        $this->pdf->setY($signature_y + $signature_height + 18);
         $this->pdf->Rect($x, $this->pdf->GetY() - 3, 170, 30);
         $this->pdf->Cell(2, 10, "", 0, 0);
         $this->pdf->Cell(20, 7, "Catatan", 0, 0, 'L');
