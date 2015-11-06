@@ -208,6 +208,12 @@ class Inbox extends CI_Controller
         $this->load->view('templates/template', $data);
     }
 
+    public function print_inbox($id)
+    {
+        $this->load->model("Printer_model", "printer_model");
+        $this->printer_model->print_inbox($id);
+    }
+
     public function delete($id, $redirect = null)
     {
         $result = $this->inbox_model->delete($id);
