@@ -88,15 +88,18 @@ class Printer_model extends CI_Model
         $labels = $this->label_model->read();
 
         foreach($labels as $label):
-            if($label['id'] ==  $mail['label_id']){
-                $this->pdf->Rect(143, $this->pdf->GetY() + 2, 4, 4, 'F');
-            }
-            else{
-                $this->pdf->Rect(143, $this->pdf->GetY() + 2, 4, 4);
+            if($label['id'] > 1){
+                if($label['id'] ==  $mail['label_id']){
+                    $this->pdf->Rect(143, $this->pdf->GetY() + 2, 4, 4, 'F');
+                }
+                else{
+                    $this->pdf->Rect(143, $this->pdf->GetY() + 2, 4, 4);
+                }
+
+                $this->pdf->SetXY(150, $this->pdf->GetY() + 2);
+                $this->pdf->Cell(50, 4, $label['label'], 0, 1, 'L');
             }
 
-            $this->pdf->SetXY(150, $this->pdf->GetY() + 2);
-            $this->pdf->Cell(50, 4, $label['label'], 0, 1, 'L');
         endforeach;
 
         // border right
@@ -164,6 +167,8 @@ class Printer_model extends CI_Model
         endforeach;
 
 
+
+
         // signature
         $this->pdf->SetXY(110, $y_signature);
         $this->pdf->Cell(2, 7, "", 0, 0);
@@ -194,10 +199,10 @@ class Printer_model extends CI_Model
             $this->pdf->Cell(50, 4, $signature['signature'], 0, 1, 'L');
         endforeach;
 
-        $this->pdf->Rect($x, $signature_y, 170, $signature_height + 2);
+        $this->pdf->Rect($x, $signature_y, 170, $signature_height + 10);
 
 
-        $this->pdf->setY($signature_y + $signature_height + 5);
+        $this->pdf->setY($signature_y + $signature_height + 13);
         $this->pdf->Rect($x, $this->pdf->GetY() - 3, 170, 30);
         $this->pdf->Cell(2, 10, "", 0, 0);
         $this->pdf->Cell(20, 7, "Catatan", 0, 0, 'L');

@@ -116,7 +116,7 @@
                                 <div class="col-sm-8">
                                     <select class="form-control form-white required" name="label" id="label" data-style="white" data-placeholder="Select a label...">
                                         <?php foreach($labels as $label): ?>
-                                            <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"], ($label["id"]==2)?TRUE:FALSE); ?>><?=ucfirst(strtolower($label['label']))?></option>
+                                            <option value="<?=$label['id']?>" <?php echo set_select('label', $label["id"]); ?>><?=ucfirst(strtolower($label['label']))?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

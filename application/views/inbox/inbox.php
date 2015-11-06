@@ -41,10 +41,10 @@
                         <tr>
                             <td><?=$no++?></td>
                             <td><?=$mail['mail_number']?></td>
-                            <td><?=word_limiter($mail['subject'], 4)?></td>
+                            <td><?=word_limiter($mail['subject'], 5)?></td>
                             <td><?=date_format(date_create($mail['received_date']), "d M Y")?></td>
                             <td><?=date_format(date_create($mail['mail_date']), "d M Y")?></td>
-                            <td><?=$mail['from']?></td>
+                            <td><?=word_limiter($mail['from'], 5)?></td>
                             <td><a href="<?=site_url()?>inbox/show/<?=$mail['id']?>.html">Detail</a></td>
                             <td>
                                 <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0"><i class="icon-pencil"></i></a>
