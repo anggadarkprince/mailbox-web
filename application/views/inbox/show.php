@@ -43,15 +43,31 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label" for="receiver">Tujuan</label>
+                                <label class="col-sm-4 control-label" for="receiver">Diteruskan</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><?=$mail['to']?></p>
+                                    <ul class="m-l-20">
+                                        <?php foreach($divisions as $division): ?>
+                                            <li><?=$division['division']?></li>
+                                        <?php endforeach; ?>
+
+                                        <?php if(trim($mail['authorizing_signature']) != ""){ ?>
+                                            <li><?=$mail['authorizing_signature']?></li>
+                                        <?php } ?>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="signature">Disposisi</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static"><?=$mail['authorizing_signature']?></p>
+                                    <ul class="m-l-20">
+                                        <?php foreach($signatures as $signature): ?>
+                                            <li><?=$signature['signature']?></li>
+                                        <?php endforeach; ?>
+
+                                        <?php if(trim($mail['to']) != ""){ ?>
+                                            <li><?=$mail['to']?></li>
+                                        <?php } ?>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

@@ -113,6 +113,8 @@ class Inbox extends CI_Controller
             'page' => "inbox/edit",
             'labels' => $this->label_model->read(),
             'mail' => $this->inbox_model->read($id),
+            'divisions' => $this->inbox_model->read_division(),
+            'signatures' => $this->inbox_model->read_signature(),
             'attachment_original' => $this->inbox_model->read_attachment($id, 'ORIGINAL'),
             'attachment_signature' => $this->inbox_model->read_attachment($id, 'SIGNATURE')
         ];
@@ -191,6 +193,8 @@ class Inbox extends CI_Controller
             'title' => "Detail In-mail",
             'page' => "inbox/show",
             'mail' => $this->inbox_model->read($id),
+            'divisions' => $this->inbox_model->read_division($id),
+            'signatures' => $this->inbox_model->read_signature($id),
             'attachment_original' => $this->inbox_model->read_attachment($id, 'ORIGINAL'),
             'attachment_signature' => $this->inbox_model->read_attachment($id, 'SIGNATURE')
         ];

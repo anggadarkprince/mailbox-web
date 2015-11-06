@@ -74,7 +74,7 @@ class Inbox_model extends CI_Model
         return $result["no"];
     }
 
-    public function create($mail, $division, $signature)
+    public function create($mail, $divisions, $signatures)
     {
         $status = array();
 
@@ -97,13 +97,13 @@ class Inbox_model extends CI_Model
         }
 
         // division
-        for($i = 0; $i < count($division); $i++){
-            $this->db->insert("inbox_division", array("inbox_id" => $lastId, "division_id" => $division[$i]));
+        for($i = 0; $i < count($divisions); $i++){
+            $this->db->insert("inbox_division", array("inbox_id" => $lastId, "division_id" => $divisions[$i]));
         }
 
         // signature
-        for($i = 0; $i < count($signature); $i++){
-            $this->db->insert("inbox_signature",  array("inbox_id" => $lastId, "signature_id" => $signature[$i]));
+        for($j = 0; $j < count($signatures); $j++){
+            $this->db->insert("inbox_signature",  array("inbox_id" => $lastId, "signature_id" => $signatures[$j]));
         }
 
         $this->db->trans_complete();
@@ -143,15 +143,39 @@ class Inbox_model extends CI_Model
         return $result->result_array();
     }
 
-    public function read_division()
+    public function read_division($id = null)
     {
-        $result = $this->db->get('division');
+        if($id == null){
+            $result = $this->db->get('division');
+        }
+        else{
+            $result = $this->db
+                ->select("division.*")
+                ->from($this->table)
+                ->join("inbox_division", "inbox.id = inbox_division.inbox_id")
+                ->join("division", "division_id = division.id")
+                ->where($this->table.".".$this->pk, $id)
+                ->get();
+        }
+
         return $result->result_array();
     }
 
-    public function read_signature()
+    public function read_signature($id = null)
     {
-        $result = $this->db->get('signature');
+        if($id == null){
+            $result = $this->db->get('signature');
+        }
+        else{
+            $result = $this->db
+                ->select("signature.*")
+                ->from($this->table)
+                ->join("inbox_signature", "inbox.id = inbox_signature.inbox_id")
+                ->join("signature", "signature_id = signature.id")
+                ->where($this->table.".".$this->pk, $id)
+                ->get();
+        }
+
         return $result->result_array();
     }
 

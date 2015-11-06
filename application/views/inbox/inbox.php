@@ -30,7 +30,6 @@
                         <th>Tgl Terima</th>
                         <th>Tgl Surat</th>
                         <th>Dari</th>
-                        <th>Kepada</th>
                         <th>Detail</th>
                         <th width="120">Action</th>
                     </tr>
@@ -46,7 +45,6 @@
                             <td><?=date_format(date_create($mail['received_date']), "d M Y")?></td>
                             <td><?=date_format(date_create($mail['mail_date']), "d M Y")?></td>
                             <td><?=$mail['from']?></td>
-                            <td><?=$mail['to']?></td>
                             <td><a href="<?=site_url()?>inbox/show/<?=$mail['id']?>.html">Detail</a></td>
                             <td>
                                 <a href="<?=site_url()?>inbox/edit/<?=$mail['id']?>.html" class="btn btn-primary btn-sm m-r-0"><i class="icon-pencil"></i></a>
