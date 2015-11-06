@@ -115,6 +115,8 @@ class Inbox extends CI_Controller
             'mail' => $this->inbox_model->read($id),
             'divisions' => $this->inbox_model->read_division(),
             'signatures' => $this->inbox_model->read_signature(),
+            'inbox_divisions' => $this->inbox_model->read_division($id),
+            'inbox_signatures' => $this->inbox_model->read_signature($id),
             'attachment_original' => $this->inbox_model->read_attachment($id, 'ORIGINAL'),
             'attachment_signature' => $this->inbox_model->read_attachment($id, 'SIGNATURE')
         ];
@@ -135,6 +137,8 @@ class Inbox extends CI_Controller
             $this->form_validation->set_rules('mail_date', 'Tanggal Surat', 'trim|required');
             $this->form_validation->set_rules('received_date', 'Tanggal Terima', 'trim|required');
             $this->form_validation->set_rules('label', 'Label', 'trim|required');
+            $this->form_validation->set_rules('divisions[]', 'Terusan', 'min_length[0]');
+            $this->form_validation->set_rules('signatures[]', 'List Disposisi', 'min_length[0]');
 
             if ($this->form_validation->run() == FALSE)
             {
@@ -157,7 +161,10 @@ class Inbox extends CI_Controller
                     'label_id' => $this->input->post('label'),
                 ];
 
-                $result = $this->inbox_model->update($data, $this->input->post("id"));
+                $division = $this->input->post('divisions');
+                $signature = $this->input->post('signatures');
+
+                $result = $this->inbox_model->update($data, $this->input->post("id"), $division, $signature);
                 if(isset($result["upload"]) && !$result["upload"]){
                     $data = [
                         "operation" => "warning",

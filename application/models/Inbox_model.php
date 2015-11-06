@@ -179,24 +179,45 @@ class Inbox_model extends CI_Model
         return $result->result_array();
     }
 
-    public function update($mail, $id)
+    public function update($mail, $id, $divisions, $signatures)
     {
         $status = array();
 
+        $this->db->trans_start();
+
+        // inbox
         $this->db->where($this->pk, $id);
         $inbox = $this->db->update($this->table, $mail);
-        if($inbox){
+        if($inbox && (isset($_FILES['attachment-original']) || isset($_FILES['attachment-signature']))){
+            // original attachment
             $original = $this->upload_batch_attachment('attachment-original', $id, 'ORIGINAL');
             if(!$original['upload'] || !$original['query']){
                 return $original;
             }
+            // signature attachment
             $signature = $this->upload_batch_attachment('attachment-signature', $id, 'SIGNATURE');
             if(!$signature['upload'] || !$signature['query']){
                 return $signature;
             }
         }
 
-        $status["query"] = $inbox;
+        // division
+        $condition = array("inbox_division.inbox_id" => $id);
+        $this->db->delete("inbox_division", $condition);
+        for($i = 0; $i < count($divisions); $i++){
+            $this->db->insert("inbox_division", array("inbox_id" => $id, "division_id" => $divisions[$i]));
+        }
+
+        // signature
+        $condition = array("inbox_signature.inbox_id" => $id);
+        $this->db->delete("inbox_signature", $condition);
+        for($j = 0; $j < count($signatures); $j++){
+            $this->db->insert("inbox_signature",  array("inbox_id" => $id, "signature_id" => $signatures[$j]));
+        }
+
+        $this->db->trans_complete();
+
+        $status["query"] = $this->db->trans_status();
         $status["upload"] = true;
         $status["message"] = "Attachment successfully uploaded";
 
