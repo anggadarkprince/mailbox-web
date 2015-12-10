@@ -32,7 +32,7 @@
                                         <div>
                                             <strong><?=substr($mail['subject'], 0, 30)?>...</strong>
                                         </div>
-                                        <p><?=substr($mail['authorizing_signature'], 0, 40)?>...</p>
+                                        <p><?=substr($mail['from'], 0, 40)?>...</p>
                                     </a>
                                 </li>
                             <?php endforeach; ?>
